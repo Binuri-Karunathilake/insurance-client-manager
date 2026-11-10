@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens, matching the "Tokens" variables in the Figma file
+ * (Insurance Client Manager – v1 Mockups). Change them in both places.
+ */
+@theme {
+  --color-primary: #2346b8;
+  --color-primary-soft: #e8edfb;
+  --color-on-primary: #ffffff;
+  --color-bg: #f4f5f7;
+  --color-surface: #ffffff;
+  --color-border: #e2e5ea;
+  --color-text: #111827;
+  --color-muted: #6b7280;
+  --color-success: #15803d;
+  --color-success-soft: #e6f4ea;
+  --color-warning: #b45309;
+  --color-warning-soft: #fef3e2;
+  --color-danger: #b91c1c;
+  --color-danger-soft: #fdecec;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  /* Inter has no Sinhala letters, so the browser picks Yaldevi for them. */
+  --font-sans: var(--font-inter), var(--font-yaldevi), system-ui, sans-serif;
+
+  /* Figma text styles: EN/Title, EN/Heading, EN/Body, EN/Caption, EN/Label, Num/Stat */
+  --text-title: 22px;
+  --text-title--line-height: 28px;
+  --text-title--font-weight: 600;
+  --text-heading: 17px;
+  --text-heading--line-height: 24px;
+  --text-heading--font-weight: 600;
+  --text-body: 15px;
+  --text-body--line-height: 22px;
+  --text-caption: 13px;
+  --text-caption--line-height: 18px;
+  --text-label: 12px;
+  --text-label--line-height: 16px;
+  --text-stat: 26px;
+  --text-stat--line-height: 32px;
+  --text-stat--font-weight: 700;
+}
+
+/* Sinhala letters are taller: give lines more room (Figma SI/* styles). */
+html[lang="si"] {
+  --text-title--line-height: 32px;
+  --text-heading--line-height: 26px;
+  --text-body--line-height: 24px;
+  --text-caption--line-height: 20px;
+  --text-label--line-height: 18px;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}

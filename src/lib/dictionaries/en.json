@@ -1,0 +1,78 @@
+{
+  "app": {
+    "name": "Client Manager",
+    "role": "Insurance agent",
+    "switchLanguage": "සිංහල",
+    "signOut": "Sign out"
+  },
+  "nav": {
+    "today": "Today",
+    "clients": "Clients",
+    "reminders": "Reminders",
+    "documents": "Documents"
+  },
+  "today": {
+    "greetingMorning": "Good morning",
+    "greetingAfternoon": "Good afternoon",
+    "greetingEvening": "Good evening",
+    "premiumsDue": "Premiums due this week",
+    "renewals": "Renewals this month",
+    "birthdays": "Birthdays this week",
+    "overdue": "Overdue",
+    "loadError": "Couldn't load today's items. Check the Supabase setup in the README.",
+    "addClient": "Add client"
+  },
+  "placeholder": {
+    "comingNext": "This screen is next on the build plan.",
+    "clients": "Search and list clients, then open a client's profile with policies, family, documents and notes.",
+    "reminders": "Premiums, renewals, birthdays and follow-ups, grouped by day, with Call and WhatsApp buttons.",
+    "documents": "Photograph NIC copies, proposal forms and policies and file them under a client."
+  },
+  "auth": {
+    "signInTitle": "Sign in",
+    "signInIntro": "Client records are private. Sign in with your email, password and authenticator app.",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign in",
+    "signingIn": "Signing in…",
+    "badLogin": "That email and password don't match.",
+    "idleSignedOut": "You were signed out after 30 minutes without activity.",
+    "mfaTitle": "Enter your code",
+    "mfaIntro": "Open your authenticator app and type the 6-digit code for Client Manager.",
+    "code": "6-digit code",
+    "verify": "Verify",
+    "verifying": "Checking…",
+    "badCode": "That code didn't work. Codes change every 30 seconds, so try the newest one.",
+    "setupTitle": "Set up two-step sign-in",
+    "setupIntro": "Scan this QR code with an authenticator app such as Google Authenticator or Microsoft Authenticator. You'll need a code from it every time you sign in.",
+    "setupManual": "Can't scan? Type this key into the app:",
+    "setupConfirm": "Then type the 6-digit code the app shows.",
+    "setupError": "Couldn't start set-up. Refresh the page to try again.",
+    "loading": "Loading…"
+  },
+  "calendar": {
+    "months": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "weekdays": [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ]
+  }
+}
