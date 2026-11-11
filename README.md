@@ -40,7 +40,7 @@ phone / tablet ──► Next.js on Vercel ──► Supabase (Postgres + Auth +
 ## Run it locally
 
 1. **Create a Supabase project** at [supabase.com](https://supabase.com) (the free plan is enough). Choose the Singapore or Mumbai region, closest to Sri Lanka.
-2. **Create the database.** In the Supabase dashboard open *SQL Editor*, paste the whole of [`supabase/migrations/20261110000000_init.sql`](supabase/migrations/20261110000000_init.sql) and run it.
+2. **Create the database.** In the Supabase dashboard open *SQL Editor* and run each file in [`supabase/migrations`](supabase/migrations) in order, oldest first. When a new migration is added later, run just that file.
 3. **Lock down sign-up.** *Authentication → Sign In / Providers*: turn off **Allow new users to sign up**. *Authentication → Multi-Factor*: make sure **TOTP** is enabled.
 4. **Create your user.** *Authentication → Users → Add user*, with email and password and **Auto Confirm User** ticked. A trigger creates an agency for the new user automatically. To show a first name on the Today screen, add `{"full_name": "Your Name"}` to the user's metadata.
 5. **(Optional) Load the demo clients.** In the SQL Editor run [`supabase/seed.sql`](supabase/seed.sql), then:

@@ -27,7 +27,7 @@ begin
     (target_agency, 'Union Care Health', 'Peradeniya') returning id into union_care;
 
   insert into public.clients (agency_id, full_name, mobile, nic, date_of_birth, address)
-    values (target_agency, 'Nimal Perera', '077 123 4567', '197912345123V', '1979-03-14', '12 Temple Road, Kandy')
+    values (target_agency, 'Nimal Perera', '077 123 4567', '791234123V', '1979-03-14', '12 Temple Road, Kandy')
     returning id into nimal;
   insert into public.clients (agency_id, full_name, mobile, date_of_birth, address)
     values (target_agency, 'Kumari Silva', '071 234 5678', '1985-07-02', '45 Lake View, Kandy')
