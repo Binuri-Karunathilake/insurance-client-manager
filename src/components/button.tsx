@@ -31,7 +31,7 @@ export function Button({
 }: Common & ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button type={type} className={classes(variant, size, className)} {...props}>
-      {icon && <Icon name={icon} size={size === "sm" ? 16 : 20} />}
+      {icon && <Icon name={icon} size={size === "sm" ? 16 : 20} className="shrink-0" />}
       {children}
     </button>
   );
@@ -47,7 +47,7 @@ export function ButtonLink({
 }: Common & ComponentProps<typeof Link>) {
   return (
     <Link className={classes(variant, size, className)} {...props}>
-      {icon && <Icon name={icon} size={size === "sm" ? 16 : 20} />}
+      {icon && <Icon name={icon} size={size === "sm" ? 16 : 20} className="shrink-0" />}
       {children}
     </Link>
   );
@@ -64,7 +64,7 @@ export function ButtonAnchor({
 }: Common & ComponentProps<"a">) {
   return (
     <a className={classes(variant, size, className)} {...props}>
-      {icon && <Icon name={icon} size={size === "sm" ? 16 : 20} />}
+      {icon && <Icon name={icon} size={size === "sm" ? 16 : 20} className="shrink-0" />}
       {children}
     </a>
   );

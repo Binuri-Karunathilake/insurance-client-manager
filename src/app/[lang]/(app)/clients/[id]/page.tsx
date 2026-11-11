@@ -8,7 +8,7 @@ import { ageFrom, daysUntil, formatDate, formatMoney } from "@/lib/format";
 import { fill } from "@/lib/text";
 import type { Locale } from "@/lib/locales";
 import { Avatar, Chip, type Tone } from "@/components/chip";
-import { ButtonAnchor } from "@/components/button";
+import { ButtonAnchor, ButtonLink } from "@/components/button";
 import { Icon } from "@/components/icons";
 import { AddFamilyForm, AddNoteForm, RemoveButton } from "./tab-forms";
 
@@ -112,6 +112,9 @@ function ClientHeader({ client, lang, dict }: { client: ClientProfile; lang: Loc
             </p>
           )}
         </div>
+        <ButtonLink href={`/${lang}/clients/${client.id}/edit`} variant="outline" icon="edit" aria-label={t.edit} className="w-11 px-0 md:w-auto md:px-4">
+          <span className="hidden md:inline">{t.edit}</span>
+        </ButtonLink>
       </div>
 
       <div className="grid grid-cols-2 gap-2 md:flex md:justify-start">
