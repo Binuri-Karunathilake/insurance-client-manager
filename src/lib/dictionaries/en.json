@@ -74,5 +74,40 @@
       "Friday",
       "Saturday"
     ]
+  },
+  "clients": {
+    "title": "Clients",
+    "count": "{n} clients",
+    "countOne": "1 client",
+    "search": "Search name, NIC, phone or policy no.",
+    "add": "Add client",
+    "filters": {
+      "all": "All",
+      "due": "Due soon",
+      "overdue": "Overdue",
+      "birthday": "Birthdays",
+      "lapsed": "Lapsed"
+    },
+    "status": {
+      "due": "Due soon",
+      "overdue": "Overdue",
+      "birthday": "Birthday",
+      "lapsed": "Lapsed"
+    },
+    "policiesCount": "{n} policies",
+    "noPolicies": "No policies yet",
+    "emptyTitle": "No clients yet",
+    "emptyBody": "Add your first client. Only a name and mobile number are needed.",
+    "noMatch": "No clients match “{q}”.",
+    "noFilterMatch": "No clients in this list right now.",
+    "showMore": "Show more",
+    "showing": "Showing {shown} of {total}"
+  },
+  "policyTypes": {
+    "life": "Life",
+    "motor": "Motor",
+    "health": "Health",
+    "property": "Property",
+    "other": "Other"
   }
 }
