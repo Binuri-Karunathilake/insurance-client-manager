@@ -73,6 +73,20 @@
       "Thursday",
       "Friday",
       "Saturday"
+    ],
+    "monthsShort": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
     ]
   },
   "clients": {
@@ -143,5 +157,56 @@
       "nicTaken": "Another client already has this NIC number.",
       "generic": "Couldn't save. Check your connection and try again."
     }
+  },
+  "profile": {
+    "back": "Clients",
+    "edit": "Edit",
+    "call": "Call",
+    "whatsapp": "WhatsApp",
+    "mobile": "Mobile",
+    "whatsappNumber": "WhatsApp",
+    "dob": "Date of birth",
+    "age": "{n} yrs",
+    "address": "Address",
+    "clientSince": "Client since",
+    "nic": "NIC",
+    "tabs": {
+      "policies": "Policies",
+      "family": "Family",
+      "documents": "Documents",
+      "notes": "Notes"
+    },
+    "noPolicies": "No policies yet.",
+    "noFamily": "No family members added.",
+    "noNotes": "No notes yet.",
+    "documentsSoon": "Photos of NIC copies, proposal forms and policy documents will be filed here.",
+    "notFound": "This client doesn't exist or was removed."
+  },
+  "policy": {
+    "number": "Policy no.",
+    "premium": "Premium",
+    "nextDue": "Next due",
+    "renewal": "Renewal",
+    "sumAssured": "Sum assured",
+    "insurerUnknown": "Insurer not set",
+    "frequency": {
+      "monthly": "/ month",
+      "quarterly": "/ quarter",
+      "half_yearly": "/ 6 months",
+      "yearly": "/ year",
+      "single": "single premium"
+    },
+    "status": {
+      "active": "Active",
+      "pending": "Pending",
+      "lapsed": "Lapsed",
+      "matured": "Matured",
+      "cancelled": "Cancelled"
+    },
+    "dueIn": "Due in {n} days",
+    "dueToday": "Due today",
+    "dueTomorrow": "Due tomorrow",
+    "overdueBy": "{n} days late",
+    "renewalIn": "Renews in {n} days"
   }
 }
