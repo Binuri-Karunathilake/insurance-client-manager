@@ -10,6 +10,7 @@ import type { Locale } from "@/lib/locales";
 import { Avatar, Chip, type Tone } from "@/components/chip";
 import { ButtonAnchor } from "@/components/button";
 import { Icon } from "@/components/icons";
+import { AddFamilyForm, AddNoteForm, RemoveButton } from "./tab-forms";
 
 export const metadata: Metadata = { title: "Client" };
 
@@ -206,40 +207,56 @@ function PolicyCard({ policy, lang, dict }: { policy: ClientProfile["policies"][
 }
 
 function FamilyTab({ client, lang, dict }: { client: ClientProfile; lang: Locale; dict: Dictionary }) {
-  if (client.family_members.length === 0) {
-    return <p className="rounded-lg border border-border bg-surface p-6 text-body text-muted">{dict.profile.noFamily}</p>;
-  }
+  const t = dict.family;
+  const relationship = (r: string) => (r in t.relationships ? t.relationships[r as keyof typeof t.relationships] : r);
   return (
-    <ul className="overflow-hidden rounded-lg border border-border bg-surface">
-      {client.family_members.map((m) => (
-        <li key={m.id} className="flex items-center gap-3 border-b border-border px-4 py-3 last:border-b-0">
-          <Avatar name={m.full_name} />
-          <div className="flex min-w-0 flex-col">
-            <span className="truncate text-body font-medium">{m.full_name}</span>
-            <span className="text-caption text-muted">
-              {m.relationship}
-              {m.date_of_birth && ` · ${formatDate(m.date_of_birth, dict.calendar, lang)} · ${fill(dict.profile.age, { n: ageFrom(m.date_of_birth) })}`}
-            </span>
-          </div>
-        </li>
-      ))}
-    </ul>
+    <div className="flex flex-col gap-3">
+      {client.family_members.length === 0 ? (
+        <p className="rounded-lg border border-border bg-surface p-6 text-body text-muted">{dict.profile.noFamily}</p>
+      ) : (
+        <ul className="overflow-hidden rounded-lg border border-border bg-surface">
+          {client.family_members.map((m) => (
+            <li key={m.id} className="flex items-center gap-3 border-b border-border px-4 py-3 last:border-b-0">
+              <Avatar name={m.full_name} />
+              <div className="flex min-w-0 flex-1 flex-col">
+                <span className="truncate text-body font-medium">{m.full_name}</span>
+                <span className="text-caption text-muted">
+                  {relationship(m.relationship)}
+                  {m.date_of_birth &&
+                    ` · ${formatDate(m.date_of_birth, dict.calendar, lang)} · ${fill(dict.profile.age, { n: ageFrom(m.date_of_birth) })}`}
+                </span>
+              </div>
+              <RemoveButton table="family_members" id={m.id} label={t.remove} confirmLabel={t.confirmRemove} />
+            </li>
+          ))}
+        </ul>
+      )}
+      <p className="text-caption text-muted">{t.birthdayNote}</p>
+      <AddFamilyForm clientId={client.id} t={t} />
+    </div>
   );
 }
 
 function NotesTab({ client, lang, dict }: { client: ClientProfile; lang: Locale; dict: Dictionary }) {
-  if (client.client_notes.length === 0) {
-    return <p className="rounded-lg border border-border bg-surface p-6 text-body text-muted">{dict.profile.noNotes}</p>;
-  }
   return (
-    <ul className="flex flex-col gap-3">
-      {client.client_notes.map((n) => (
-        <li key={n.id} className="flex flex-col gap-2 rounded-lg border border-border bg-surface px-4 py-3">
-          <span className="text-label font-medium text-muted">{formatDate(n.created_at, dict.calendar, lang)}</span>
-          <p className="text-body whitespace-pre-line">{n.body}</p>
-        </li>
-      ))}
-    </ul>
+    <div className="flex flex-col gap-3">
+      <AddNoteForm clientId={client.id} t={dict.notes} />
+      {client.client_notes.length === 0 ? (
+        <p className="rounded-lg border border-border bg-surface p-6 text-body text-muted">{dict.profile.noNotes}</p>
+      ) : (
+        <ul className="flex flex-col gap-3">
+          {client.client_notes.map((n) => (
+            <li key={n.id} className="flex flex-col gap-2 rounded-lg border border-border bg-surface px-4 py-3">
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-label font-medium text-muted">{formatDate(n.created_at, dict.calendar, lang)}</span>
+                <RemoveButton table="client_notes" id={n.id} label={dict.notes.remove} confirmLabel={dict.notes.confirmRemove} />
+              </div>
+              <p className="text-body whitespace-pre-line">{n.body}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
 

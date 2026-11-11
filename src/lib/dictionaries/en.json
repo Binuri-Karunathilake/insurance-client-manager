@@ -208,5 +208,45 @@
     "dueTomorrow": "Due tomorrow",
     "overdueBy": "{n} days late",
     "renewalIn": "Renews in {n} days"
+  },
+  "family": {
+    "add": "Add family member",
+    "name": "Name",
+    "relationship": "Relationship",
+    "dob": "Date of birth (optional)",
+    "save": "Add",
+    "saving": "Adding…",
+    "remove": "Remove",
+    "confirmRemove": "Tap again to remove",
+    "birthdayNote": "Family birthdays also show up in Reminders.",
+    "relationships": {
+      "wife": "Wife",
+      "husband": "Husband",
+      "son": "Son",
+      "daughter": "Daughter",
+      "father": "Father",
+      "mother": "Mother",
+      "brother": "Brother",
+      "sister": "Sister",
+      "other": "Other"
+    },
+    "errors": {
+      "nameRequired": "Enter a name.",
+      "dobInvalid": "Enter a date in the past.",
+      "generic": "Couldn't save. Try again."
+    },
+    "cancel": "Cancel"
+  },
+  "notes": {
+    "placeholder": "Write a note…",
+    "save": "Save note",
+    "saving": "Saving…",
+    "noMedical": "Keep medical details out of notes.",
+    "remove": "Delete",
+    "confirmRemove": "Tap again to delete",
+    "errors": {
+      "bodyRequired": "Write something first.",
+      "generic": "Couldn't save. Try again."
+    }
   }
 }
