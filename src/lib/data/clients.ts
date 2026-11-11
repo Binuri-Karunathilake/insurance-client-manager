@@ -130,3 +130,17 @@ export async function listInsurers(): Promise<Insurer[]> {
   const { data } = await supabase.from("insurers").select("id, name, branch").order("name");
   return (data ?? []) as Insurer[];
 }
+
+/** Clients created since midnight Sri Lanka time, newest first (for bulk entry). */
+export async function listAddedToday(): Promise<Pick<Client, "id" | "full_name" | "mobile">[]> {
+  await getCurrentUser();
+  const supabase = await createClient();
+  const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Colombo" }).format(new Date());
+  const { data } = await supabase
+    .from("clients")
+    .select("id, full_name, mobile")
+    .gte("created_at", `${today}T00:00:00+05:30`)
+    .order("created_at", { ascending: false })
+    .limit(20);
+  return (data ?? []) as Pick<Client, "id" | "full_name" | "mobile">[];
+}

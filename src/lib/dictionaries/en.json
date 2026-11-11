@@ -109,5 +109,39 @@
     "health": "Health",
     "property": "Property",
     "other": "Other"
+  },
+  "clientForm": {
+    "newTitle": "New client",
+    "editTitle": "Edit client",
+    "newIntro": "Only name and mobile number are needed now. You can add the rest later.",
+    "fullName": "Full name",
+    "mobile": "Mobile number",
+    "sameWhatsapp": "WhatsApp is on the same number",
+    "whatsapp": "WhatsApp number",
+    "nic": "NIC number",
+    "dob": "Date of birth",
+    "address": "Address",
+    "language": "Prefers messages in",
+    "langSi": "Sinhala",
+    "langEn": "English",
+    "optional": "optional",
+    "nicHint": "Old (9 digits + V) or new (12 digits) format",
+    "save": "Save",
+    "saveNext": "Save and add next",
+    "saveChanges": "Save changes",
+    "cancel": "Cancel",
+    "saving": "Saving…",
+    "savedNext": "Saved {name}. Ready for the next client.",
+    "addedToday": "Added today",
+    "addedTodayEmpty": "Clients you add today appear here.",
+    "errors": {
+      "nameRequired": "Enter the client's name.",
+      "mobileInvalid": "Enter a 10-digit mobile number, e.g. 077 123 4567.",
+      "whatsappInvalid": "Enter a 10-digit WhatsApp number.",
+      "nicInvalid": "Use 9 digits + V/X, or 12 digits.",
+      "dobInvalid": "Enter a date in the past.",
+      "nicTaken": "Another client already has this NIC number.",
+      "generic": "Couldn't save. Check your connection and try again."
+    }
   }
 }
