@@ -73,6 +73,180 @@
       "Thursday",
       "Friday",
       "Saturday"
+    ],
+    "monthsShort": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
     ]
+  },
+  "clients": {
+    "title": "Clients",
+    "count": "{n} clients",
+    "countOne": "1 client",
+    "search": "Search name, NIC, phone or policy no.",
+    "add": "Add client",
+    "filters": {
+      "all": "All",
+      "due": "Due soon",
+      "overdue": "Overdue",
+      "birthday": "Birthdays",
+      "lapsed": "Lapsed"
+    },
+    "status": {
+      "due": "Due soon",
+      "overdue": "Overdue",
+      "birthday": "Birthday",
+      "lapsed": "Lapsed"
+    },
+    "policiesCount": "{n} policies",
+    "noPolicies": "No policies yet",
+    "emptyTitle": "No clients yet",
+    "emptyBody": "Add your first client. Only a name and mobile number are needed.",
+    "noMatch": "No clients match “{q}”.",
+    "noFilterMatch": "No clients in this list right now.",
+    "showMore": "Show more",
+    "showing": "Showing {shown} of {total}"
+  },
+  "policyTypes": {
+    "life": "Life",
+    "motor": "Motor",
+    "health": "Health",
+    "property": "Property",
+    "other": "Other"
+  },
+  "clientForm": {
+    "newTitle": "New client",
+    "editTitle": "Edit client",
+    "newIntro": "Only name and mobile number are needed now. You can add the rest later.",
+    "fullName": "Full name",
+    "mobile": "Mobile number",
+    "sameWhatsapp": "WhatsApp is on the same number",
+    "whatsapp": "WhatsApp number",
+    "nic": "NIC number",
+    "dob": "Date of birth",
+    "address": "Address",
+    "language": "Prefers messages in",
+    "langSi": "Sinhala",
+    "langEn": "English",
+    "optional": "optional",
+    "nicHint": "Old (9 digits + V) or new (12 digits) format",
+    "save": "Save",
+    "saveNext": "Save and add next",
+    "saveChanges": "Save changes",
+    "cancel": "Cancel",
+    "saving": "Saving…",
+    "savedNext": "Saved {name}. Ready for the next client.",
+    "addedToday": "Added today",
+    "addedTodayEmpty": "Clients you add today appear here.",
+    "errors": {
+      "nameRequired": "Enter the client's name.",
+      "mobileInvalid": "Enter a 10-digit mobile number, e.g. 077 123 4567.",
+      "whatsappInvalid": "Enter a 10-digit WhatsApp number.",
+      "nicInvalid": "Use 9 digits + V/X, or 12 digits.",
+      "dobInvalid": "Enter a date in the past.",
+      "nicTaken": "Another client already has this NIC number.",
+      "generic": "Couldn't save. Check your connection and try again."
+    }
+  },
+  "profile": {
+    "back": "Clients",
+    "edit": "Edit",
+    "call": "Call",
+    "whatsapp": "WhatsApp",
+    "mobile": "Mobile",
+    "whatsappNumber": "WhatsApp",
+    "dob": "Date of birth",
+    "age": "{n} yrs",
+    "address": "Address",
+    "clientSince": "Client since",
+    "nic": "NIC",
+    "tabs": {
+      "policies": "Policies",
+      "family": "Family",
+      "documents": "Documents",
+      "notes": "Notes"
+    },
+    "noPolicies": "No policies yet.",
+    "noFamily": "No family members added.",
+    "noNotes": "No notes yet.",
+    "documentsSoon": "Photos of NIC copies, proposal forms and policy documents will be filed here.",
+    "notFound": "This client doesn't exist or was removed."
+  },
+  "policy": {
+    "number": "Policy no.",
+    "premium": "Premium",
+    "nextDue": "Next due",
+    "renewal": "Renewal",
+    "sumAssured": "Sum assured",
+    "insurerUnknown": "Insurer not set",
+    "frequency": {
+      "monthly": "/ month",
+      "quarterly": "/ quarter",
+      "half_yearly": "/ 6 months",
+      "yearly": "/ year",
+      "single": "single premium"
+    },
+    "status": {
+      "active": "Active",
+      "pending": "Pending",
+      "lapsed": "Lapsed",
+      "matured": "Matured",
+      "cancelled": "Cancelled"
+    },
+    "dueIn": "Due in {n} days",
+    "dueToday": "Due today",
+    "dueTomorrow": "Due tomorrow",
+    "overdueBy": "{n} days late",
+    "renewalIn": "Renews in {n} days"
+  },
+  "family": {
+    "add": "Add family member",
+    "name": "Name",
+    "relationship": "Relationship",
+    "dob": "Date of birth (optional)",
+    "save": "Add",
+    "saving": "Adding…",
+    "remove": "Remove",
+    "confirmRemove": "Tap again to remove",
+    "birthdayNote": "Family birthdays also show up in Reminders.",
+    "relationships": {
+      "wife": "Wife",
+      "husband": "Husband",
+      "son": "Son",
+      "daughter": "Daughter",
+      "father": "Father",
+      "mother": "Mother",
+      "brother": "Brother",
+      "sister": "Sister",
+      "other": "Other"
+    },
+    "errors": {
+      "nameRequired": "Enter a name.",
+      "dobInvalid": "Enter a date in the past.",
+      "generic": "Couldn't save. Try again."
+    },
+    "cancel": "Cancel"
+  },
+  "notes": {
+    "placeholder": "Write a note…",
+    "save": "Save note",
+    "saving": "Saving…",
+    "noMedical": "Keep medical details out of notes.",
+    "remove": "Delete",
+    "confirmRemove": "Tap again to delete",
+    "errors": {
+      "bodyRequired": "Write something first.",
+      "generic": "Couldn't save. Try again."
+    }
   }
 }

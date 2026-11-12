@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getCurrentUser } from "@/lib/auth";
 import { getDictionary, getLocale, type Dictionary } from "@/lib/i18n";
 import { createClient } from "@/lib/supabase/server";
+import type { DueItem } from "@/lib/types";
 import { Icon, type IconName } from "@/components/icons";
 import { LanguageSwitch, SignOutButton } from "@/components/session-controls";
 
@@ -59,19 +60,19 @@ async function Greeting({ dict }: { dict: Dictionary }) {
   );
 }
 
-type DueItem = { kind: "premium" | "renewal" | "birthday" | "follow_up"; days_left: number };
+type DueCount = Pick<DueItem, "kind" | "days_left">;
 
 async function Stats({ dict }: { dict: Dictionary }) {
   await getCurrentUser();
   const supabase = await createClient();
-  const { data, error } = await supabase.from("due_items").select("kind, days_left").returns<DueItem[]>();
+  const { data, error } = await supabase.from("due_items").select("kind, days_left");
 
   if (error) {
     return <p className="rounded-md bg-danger-soft p-4 text-body text-danger">{dict.today.loadError}</p>;
   }
 
-  const items = data ?? [];
-  const count = (fn: (i: DueItem) => boolean) => items.filter(fn).length;
+  const items = (data ?? []) as DueCount[];
+  const count = (fn: (i: DueCount) => boolean) => items.filter(fn).length;
   const tiles: { icon: IconName; tone: string; value: number; label: string }[] = [
     { icon: "calendar", tone: "text-warning", value: count((i) => i.kind === "premium" && i.days_left >= 0), label: dict.today.premiumsDue },
     { icon: "refresh", tone: "text-primary", value: count((i) => i.kind === "renewal" && i.days_left >= 0), label: dict.today.renewals },

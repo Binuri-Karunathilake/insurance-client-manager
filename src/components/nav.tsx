@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Icon, type IconName } from "./icons";
@@ -14,15 +15,42 @@ const items: { key: keyof NavLabels; href: string; icon: IconName }[] = [
   { key: "documents", href: "/documents", icon: "folder" },
 ];
 
-function useActive(lang: Locale) {
-  const pathname = usePathname();
+type NavProps = { lang: Locale; labels: NavLabels };
+
+// The current page is only known at request time. Each nav renders once
+// without a highlight (prebuilt), then with it as soon as the path is known.
+function activeIn(lang: Locale, pathname?: string) {
   return (href: string) =>
-    href === "" ? pathname === `/${lang}` : pathname.startsWith(`/${lang}${href}`);
+    !!pathname && (href === "" ? pathname === `/${lang}` : pathname.startsWith(`/${lang}${href}`));
+}
+
+export function BottomNav(props: NavProps) {
+  return (
+    <Suspense fallback={<BottomNavView {...props} />}>
+      <BottomNavLive {...props} />
+    </Suspense>
+  );
+}
+
+export function SidebarNav(props: NavProps) {
+  return (
+    <Suspense fallback={<SidebarNavView {...props} />}>
+      <SidebarNavLive {...props} />
+    </Suspense>
+  );
+}
+
+function BottomNavLive(props: NavProps) {
+  return <BottomNavView {...props} pathname={usePathname()} />;
+}
+
+function SidebarNavLive(props: NavProps) {
+  return <SidebarNavView {...props} pathname={usePathname()} />;
 }
 
 /** Phone: fixed bar at the bottom (Figma "Bottom nav"). Hidden from tablet width up. */
-export function BottomNav({ lang, labels }: { lang: Locale; labels: NavLabels }) {
-  const isActive = useActive(lang);
+function BottomNavView({ lang, labels, pathname }: NavProps & { pathname?: string }) {
+  const isActive = activeIn(lang, pathname);
   return (
     <nav
       aria-label="Main"
@@ -52,8 +80,8 @@ export function BottomNav({ lang, labels }: { lang: Locale; labels: NavLabels })
 }
 
 /** Tablet and laptop: sidebar on the left (Figma "Sidebar"). */
-export function SidebarNav({ lang, labels }: { lang: Locale; labels: NavLabels }) {
-  const isActive = useActive(lang);
+function SidebarNavView({ lang, labels, pathname }: NavProps & { pathname?: string }) {
+  const isActive = activeIn(lang, pathname);
   return (
     <ul className="flex flex-col gap-1">
       {items.map((item) => {

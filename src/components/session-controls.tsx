@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { switchLocalePath, type Locale } from "@/lib/locales";
 import { Icon } from "./icons";
@@ -56,12 +56,25 @@ export function SignOutButton({ lang, label }: { lang: Locale; label: string }) 
   );
 }
 
-export function LanguageSwitch({ lang, label }: { lang: Locale; label: string }) {
+export function LanguageSwitch(props: { lang: Locale; label: string }) {
+  // Until the current path is known, switch to the other language's home page.
+  return (
+    <Suspense fallback={<LanguageLink {...props} href={`/${props.lang === "en" ? "si" : "en"}`} />}>
+      <LanguageSwitchLive {...props} />
+    </Suspense>
+  );
+}
+
+function LanguageSwitchLive(props: { lang: Locale; label: string }) {
   const pathname = usePathname();
+  return <LanguageLink {...props} href={switchLocalePath(pathname, props.lang === "en" ? "si" : "en")} />;
+}
+
+function LanguageLink({ lang, label, href }: { lang: Locale; label: string; href: string }) {
   const other: Locale = lang === "en" ? "si" : "en";
   return (
     <Link
-      href={switchLocalePath(pathname, other)}
+      href={href}
       hrefLang={other}
       lang={other}
       className="flex h-11 items-center gap-2 rounded-md px-3 text-body text-muted hover:bg-bg hover:text-text"
