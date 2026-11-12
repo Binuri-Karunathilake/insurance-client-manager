@@ -208,7 +208,10 @@
     "dueToday": "Due today",
     "dueTomorrow": "Due tomorrow",
     "overdueBy": "{n} days late",
-    "renewalIn": "Renews in {n} days"
+    "renewalIn": "Renews in {n} days",
+    "markPaid": "Mark as paid",
+    "confirmPaid": "Tap again: paid",
+    "edit": "Edit"
   },
   "family": {
     "add": "Add family member",

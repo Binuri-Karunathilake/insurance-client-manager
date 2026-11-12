@@ -74,3 +74,13 @@ export async function addInsurerAction(name: string): Promise<{ id: string; name
   refresh();
   return data as { id: string; name: string };
 }
+
+/** Records this period's premium as paid: next due date moves to the next payment date. */
+export async function markPaidAction(form: FormData) {
+  await requireUser();
+  const id = String(form.get("policy_id"));
+  if (!/^[0-9a-f-]{36}$/i.test(id)) return;
+  const supabase = await createClient();
+  await supabase.rpc("mark_premium_paid", { target_policy: id });
+  refresh();
+}

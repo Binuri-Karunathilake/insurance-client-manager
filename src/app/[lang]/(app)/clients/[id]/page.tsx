@@ -11,6 +11,7 @@ import { Avatar, Chip, type Tone } from "@/components/chip";
 import { ButtonAnchor, ButtonLink } from "@/components/button";
 import { Icon } from "@/components/icons";
 import { AddFamilyForm, AddNoteForm, RemoveButton } from "./tab-forms";
+import { MarkPaidButton } from "./policies/mark-paid-button";
 
 export const metadata: Metadata = { title: "Client" };
 
@@ -150,7 +151,7 @@ function PoliciesTab({ client, lang, dict }: { client: ClientProfile; lang: Loca
       ) : (
         <div className="grid gap-3 md:grid-cols-2 md:gap-4">
           {client.policies.map((p) => (
-            <PolicyCard key={p.id} policy={p} lang={lang} dict={dict} />
+            <PolicyCard key={p.id} policy={p} clientId={client.id} lang={lang} dict={dict} />
           ))}
         </div>
       )}
@@ -178,7 +179,17 @@ function policyChip(policy: ClientProfile["policies"][number], t: Dictionary["po
   return ["success", t.status.active];
 }
 
-function PolicyCard({ policy, lang, dict }: { policy: ClientProfile["policies"][number]; lang: Locale; dict: Dictionary }) {
+function PolicyCard({
+  policy,
+  clientId,
+  lang,
+  dict,
+}: {
+  policy: ClientProfile["policies"][number];
+  clientId: string;
+  lang: Locale;
+  dict: Dictionary;
+}) {
   const t = dict.policy;
   const [tone, label] = policyChip(policy, t);
   const rows: [string, string][] = [
@@ -211,6 +222,16 @@ function PolicyCard({ policy, lang, dict }: { policy: ClientProfile["policies"][
           </div>
         ))}
       </dl>
+      <footer className="flex items-center justify-between gap-2 border-t border-border pt-3">
+        {policy.status === "active" && policy.next_due_date ? (
+          <MarkPaidButton policyId={policy.id} label={t.markPaid} confirmLabel={t.confirmPaid} />
+        ) : (
+          <span />
+        )}
+        <ButtonLink href={`/${lang}/clients/${clientId}/policies/${policy.id}/edit`} variant="outline" size="sm" icon="edit" className="border-transparent text-muted">
+          {t.edit}
+        </ButtonLink>
+      </footer>
     </article>
   );
 }
