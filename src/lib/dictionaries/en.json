@@ -156,7 +156,8 @@
       "dobInvalid": "Enter a date in the past.",
       "nicTaken": "Another client already has this NIC number.",
       "generic": "Couldn't save. Check your connection and try again."
-    }
+    },
+    "addPolicyAfter": "Add a policy after saving"
   },
   "profile": {
     "back": "Clients",

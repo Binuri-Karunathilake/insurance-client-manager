@@ -145,6 +145,10 @@ function Fields({
         <option value="en">{t.langEn}</option>
       </SelectField>
 
+      {!client && (
+        <Checkbox label={t.addPolicyAfter} name="add_policy" defaultChecked={v ? v.add_policy === "on" : true} />
+      )}
+
       <div className="flex flex-col-reverse gap-3 pt-2 sm:flex-row sm:justify-end">
         <ButtonLink href={cancelHref} variant="outline">
           {t.cancel}
