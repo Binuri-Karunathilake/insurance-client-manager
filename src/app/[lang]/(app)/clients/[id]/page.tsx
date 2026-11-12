@@ -143,14 +143,20 @@ function ClientHeader({ client, lang, dict }: { client: ClientProfile; lang: Loc
 }
 
 function PoliciesTab({ client, lang, dict }: { client: ClientProfile; lang: Locale; dict: Dictionary }) {
-  if (client.policies.length === 0) {
-    return <p className="rounded-lg border border-border bg-surface p-6 text-body text-muted">{dict.profile.noPolicies}</p>;
-  }
   return (
-    <div className="grid gap-3 md:grid-cols-2 md:gap-4">
-      {client.policies.map((p) => (
-        <PolicyCard key={p.id} policy={p} lang={lang} dict={dict} />
-      ))}
+    <div className="flex flex-col gap-3">
+      {client.policies.length === 0 ? (
+        <p className="rounded-lg border border-border bg-surface p-6 text-body text-muted">{dict.profile.noPolicies}</p>
+      ) : (
+        <div className="grid gap-3 md:grid-cols-2 md:gap-4">
+          {client.policies.map((p) => (
+            <PolicyCard key={p.id} policy={p} lang={lang} dict={dict} />
+          ))}
+        </div>
+      )}
+      <ButtonLink href={`/${lang}/clients/${client.id}/policies/new`} variant="secondary" icon="plus" className="w-full md:w-auto md:self-start">
+        {dict.profile.addPolicy}
+      </ButtonLink>
     </div>
   );
 }

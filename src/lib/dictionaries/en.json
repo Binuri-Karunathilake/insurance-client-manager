@@ -180,7 +180,8 @@
     "noFamily": "No family members added.",
     "noNotes": "No notes yet.",
     "documentsSoon": "Photos of NIC copies, proposal forms and policy documents will be filed here.",
-    "notFound": "This client doesn't exist or was removed."
+    "notFound": "This client doesn't exist or was removed.",
+    "addPolicy": "Add policy"
   },
   "policy": {
     "number": "Policy no.",
@@ -247,6 +248,53 @@
     "errors": {
       "bodyRequired": "Write something first.",
       "generic": "Couldn't save. Try again."
+    }
+  },
+  "policyForm": {
+    "newTitle": "Add policy",
+    "editTitle": "Edit policy",
+    "forClient": "For {name}",
+    "insurer": "Insurance company",
+    "chooseInsurer": "Choose a company",
+    "addInsurerOption": "+ Add a company…",
+    "newInsurer": "Company name",
+    "addInsurer": "Add company",
+    "adding": "Adding…",
+    "type": "Policy type",
+    "number": "Policy number",
+    "sumAssured": "Sum assured (optional)",
+    "premium": "Premium (Rs.)",
+    "frequency": "Pays",
+    "startDate": "Start date",
+    "nextDue": "Next due date",
+    "renewal": "Renewal date",
+    "status": "Status",
+    "autoHint": "Worked out from the start date and how often he pays. You can change it.",
+    "renewalHint": "Motor, health and property policies renew every year.",
+    "frequencies": {
+      "monthly": "Monthly",
+      "quarterly": "Every 3 months",
+      "half_yearly": "Every 6 months",
+      "yearly": "Yearly",
+      "single": "Single premium"
+    },
+    "schedule": "Payment schedule",
+    "scheduleNote": "A reminder comes up 7 days before each date.",
+    "scheduleEmpty": "Fill in the start date to see the schedule.",
+    "save": "Save policy",
+    "saveChanges": "Save changes",
+    "saving": "Saving…",
+    "cancel": "Cancel",
+    "errors": {
+      "insurerRequired": "Choose the insurance company.",
+      "numberRequired": "Enter the policy number.",
+      "numberTaken": "Another policy already has this number.",
+      "premiumInvalid": "Enter the premium amount, e.g. 4500.",
+      "sumInvalid": "Enter an amount, e.g. 1500000.",
+      "dateInvalid": "Choose a date.",
+      "dueBeforeStart": "This can't be before the start date.",
+      "insurerName": "Enter the company name.",
+      "generic": "Couldn't save. Check your connection and try again."
     }
   }
 }
