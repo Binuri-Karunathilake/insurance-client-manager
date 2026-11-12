@@ -329,5 +329,23 @@
     "confirmRenewed": "Tap again: renewed",
     "done": "Done",
     "confirmDone": "Tap again: done"
+  },
+  "followUp": {
+    "title": "New follow-up",
+    "client": "Client",
+    "chooseClient": "Choose a client",
+    "date": "When",
+    "note": "What to do",
+    "notePlaceholder": "e.g. Call back about the motor quote",
+    "save": "Save follow-up",
+    "saving": "Saving…",
+    "cancel": "Cancel",
+    "add": "Follow-up",
+    "errors": {
+      "clientRequired": "Choose the client.",
+      "dateInvalid": "Choose today or a later date.",
+      "noteRequired": "Write what needs doing.",
+      "generic": "Couldn't save. Try again."
+    }
   }
 }

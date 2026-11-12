@@ -9,6 +9,7 @@ import { formatDate } from "@/lib/format";
 import { fill } from "@/lib/text";
 import type { Locale } from "@/lib/locales";
 import { ReminderCard } from "@/components/reminder-card";
+import { ButtonLink } from "@/components/button";
 import { ReminderAction } from "./reminder-actions";
 
 export const metadata: Metadata = { title: "Reminders" };
@@ -20,7 +21,19 @@ export default async function RemindersPage({ searchParams }: PageProps<"/[lang]
   const [lang, dict] = await Promise.all([getLocale(), getDictionary()]);
   return (
     <div className="mx-auto flex max-w-3xl flex-col gap-4 pb-20 md:pb-0">
-      <h1 className="text-title">{dict.reminders.title}</h1>
+      <header className="flex items-center gap-3">
+        <h1 className="flex-1 text-title">{dict.reminders.title}</h1>
+        <div className="hidden md:block">
+          <ButtonLink href={`/${lang}/reminders/new`} icon="plus">
+            {dict.followUp.add}
+          </ButtonLink>
+        </div>
+      </header>
+      <div className="fixed right-4 bottom-28 z-10 md:hidden">
+        <ButtonLink href={`/${lang}/reminders/new`} icon="plus" className="h-13 rounded-full px-5 shadow-[0_4px_12px_rgba(17,24,39,0.18)]">
+          {dict.followUp.add}
+        </ButtonLink>
+      </div>
       <Suspense fallback={<div className="h-96 animate-pulse rounded-lg border border-border bg-surface" />}>
         <RemindersList lang={lang} dict={dict} searchParams={searchParams} />
       </Suspense>

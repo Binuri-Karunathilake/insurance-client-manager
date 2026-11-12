@@ -119,6 +119,9 @@ function ClientHeader({ client, lang, dict }: { client: ClientProfile; lang: Loc
       </div>
 
       <div className="grid grid-cols-2 gap-2 md:flex md:justify-start">
+        <ButtonLink href={`/${lang}/reminders/new?client=${client.id}`} variant="secondary" icon="bell" className="order-last col-span-2">
+          {dict.followUp.add}
+        </ButtonLink>
         {tel && (
           <ButtonAnchor href={tel} variant="outline" icon="phone">
             {t.call}
