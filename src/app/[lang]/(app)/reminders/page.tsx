@@ -9,6 +9,7 @@ import { formatDate } from "@/lib/format";
 import { fill } from "@/lib/text";
 import type { Locale } from "@/lib/locales";
 import { ReminderCard } from "@/components/reminder-card";
+import { ReminderAction } from "./reminder-actions";
 
 export const metadata: Metadata = { title: "Reminders" };
 
@@ -93,7 +94,18 @@ async function RemindersList({
               {dayHeading(day, items[0].days_left, lang, dict)}
             </h2>
             {items.map((r) => (
-              <ReminderCard key={r.key} reminder={r} lang={lang} dict={dict} message={reminderMessage(r, agent)} />
+              <ReminderCard
+                key={r.key}
+                reminder={r}
+                lang={lang}
+                dict={dict}
+                message={reminderMessage(r, agent)}
+                actions={
+                  r.kind === "birthday" ? undefined : (
+                    <ReminderAction kind={r.kind} policyId={r.policy_id} followUpId={r.follow_up_id} t={dict.reminders} />
+                  )
+                }
+              />
             ))}
           </section>
         ))

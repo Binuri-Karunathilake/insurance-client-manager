@@ -322,6 +322,12 @@
     "addFollowUp": "Follow-up",
     "emptyUpcoming": "Nothing due in the next 7 days, and no renewals this month.",
     "emptyOverdue": "Nothing overdue. Well done.",
-    "loadError": "Couldn't load reminders. Check your connection and try again."
+    "loadError": "Couldn't load reminders. Check your connection and try again.",
+    "paid": "Paid",
+    "confirmPaid": "Tap again: paid",
+    "renewed": "Renewed",
+    "confirmRenewed": "Tap again: renewed",
+    "done": "Done",
+    "confirmDone": "Tap again: done"
   }
 }
