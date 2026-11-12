@@ -38,13 +38,26 @@ function Fields({
   const v = state.values;
   const initialSame = v ? v.same_whatsapp === "on" : !client?.whatsapp;
   const [sameWhatsapp, setSameWhatsapp] = useState(initialSame);
+  // An error disappears once its field is changed; a new save checks again.
+  const [edited, setEdited] = useState<Set<string>>(new Set());
   const err = (field: string) => {
     const key = state.errors?.[field];
-    return key ? t.errors[key] : undefined;
+    return key && !edited.has(field) ? t.errors[key] : undefined;
   };
 
   return (
-    <form action={action} className="flex flex-col gap-4" noValidate>
+    <form
+      action={(data) => {
+        setEdited(new Set());
+        action(data);
+      }}
+      onChange={(e) => {
+        const name = (e.target as unknown as { name?: string }).name;
+        if (name) setEdited((prev) => new Set(prev).add(name));
+      }}
+      className="flex flex-col gap-4"
+      noValidate
+    >
       <input type="hidden" name="lang" value={lang} />
       {client && <input type="hidden" name="id" value={client.id} />}
 
