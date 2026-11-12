@@ -197,11 +197,11 @@ function PolicyCard({
     [
       t.premium,
       policy.frequency === "single"
-        ? `${formatMoney(policy.premium)} · ${t.frequency.single}`
-        : `${formatMoney(policy.premium)} ${t.frequency[policy.frequency]}`,
+        ? `${formatMoney(policy.premium, lang)} · ${t.frequency.single}`
+        : `${formatMoney(policy.premium, lang)} ${t.frequency[policy.frequency]}`,
     ],
   ];
-  if (policy.sum_assured) rows.push([t.sumAssured, formatMoney(policy.sum_assured)]);
+  if (policy.sum_assured) rows.push([t.sumAssured, formatMoney(policy.sum_assured, lang)]);
   if (policy.next_due_date) rows.push([t.nextDue, formatDate(policy.next_due_date, dict.calendar, lang)]);
   if (policy.renewal_date) rows.push([t.renewal, formatDate(policy.renewal_date, dict.calendar, lang)]);
 
