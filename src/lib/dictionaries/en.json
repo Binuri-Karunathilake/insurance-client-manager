@@ -300,5 +300,28 @@
       "insurerName": "Enter the company name.",
       "generic": "Couldn't save. Check your connection and try again."
     }
+  },
+  "reminders": {
+    "title": "Reminders",
+    "summary": "{n} coming up · {late} overdue",
+    "views": {
+      "upcoming": "Coming up",
+      "overdue": "Overdue"
+    },
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "inDays": "In {n} days",
+    "daysLate": "{n} days late",
+    "dayLate": "1 day late",
+    "premium": "{type} premium {amount}",
+    "renewal": "{type} renewal",
+    "birthday": "Birthday · turns {n}",
+    "familyBirthday": "{member} ({relationship}) · turns {n}",
+    "call": "Call",
+    "whatsapp": "WhatsApp",
+    "addFollowUp": "Follow-up",
+    "emptyUpcoming": "Nothing due in the next 7 days, and no renewals this month.",
+    "emptyOverdue": "Nothing overdue. Well done.",
+    "loadError": "Couldn't load reminders. Check your connection and try again."
   }
 }

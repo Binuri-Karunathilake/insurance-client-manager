@@ -300,5 +300,28 @@
       "insurerName": "සමාගමේ නම ඇතුළත් කරන්න.",
       "generic": "සුරැකිය නොහැකි විය. සම්බන්ධතාවය පරීක්ෂා කර නැවත උත්සාහ කරන්න."
     }
+  },
+  "reminders": {
+    "title": "මතක් කිරීම්",
+    "summary": "ඉදිරියට {n} · ප්‍රමාද {late}",
+    "views": {
+      "upcoming": "ඉදිරියට",
+      "overdue": "ප්‍රමාද"
+    },
+    "today": "අද",
+    "tomorrow": "හෙට",
+    "inDays": "දින {n}කින්",
+    "daysLate": "දින {n}ක් ප්‍රමාදයි",
+    "dayLate": "දින 1ක් ප්‍රමාදයි",
+    "premium": "{type} වාරිකය {amount}",
+    "renewal": "{type} අලුත් කිරීම",
+    "birthday": "උපන්දිනය · වයස {n}",
+    "familyBirthday": "{member} ({relationship}) · වයස {n}",
+    "call": "අමතන්න",
+    "whatsapp": "WhatsApp",
+    "addFollowUp": "පසු විපරම",
+    "emptyUpcoming": "ඉදිරි දින 7 තුළ ගෙවීම් නැත, මේ මාසයේ අලුත් කිරීම් ද නැත.",
+    "emptyOverdue": "ප්‍රමාද වූ කිසිවක් නැත.",
+    "loadError": "මතක් කිරීම් පූරණය කළ නොහැකි විය. සම්බන්ධතාවය පරීක්ෂා කර නැවත උත්සාහ කරන්න."
   }
 }
