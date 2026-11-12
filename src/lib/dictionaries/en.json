@@ -20,7 +20,13 @@
     "birthdays": "Birthdays this week",
     "overdue": "Overdue",
     "loadError": "Couldn't load today's items. Check the Supabase setup in the README.",
-    "addClient": "Add client"
+    "addClient": "Add client",
+    "dueThisWeek": "Due this week",
+    "overdueList": "Overdue",
+    "birthdaysList": "Birthdays",
+    "renewalsList": "Renewals this month",
+    "seeAll": "See all",
+    "allClear": "Nothing due this week."
   },
   "placeholder": {
     "comingNext": "This screen is next on the build plan.",

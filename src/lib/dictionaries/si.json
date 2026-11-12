@@ -20,7 +20,13 @@
     "birthdays": "මේ සතියේ උපන්දින",
     "overdue": "ප්‍රමාද වූ",
     "loadError": "අද අයිතම පූරණය කළ නොහැකි විය. README හි Supabase සැකසුම පරීක්ෂා කරන්න.",
-    "addClient": "නව ගනුදෙනුකරු"
+    "addClient": "නව ගනුදෙනුකරු",
+    "dueThisWeek": "මේ සතියේ ගෙවිය යුතු",
+    "overdueList": "ප්‍රමාද වූ",
+    "birthdaysList": "උපන්දින",
+    "renewalsList": "මේ මාසයේ අලුත් කිරීම්",
+    "seeAll": "සියල්ල බලන්න",
+    "allClear": "මේ සතියේ ගෙවීම් නැත."
   },
   "placeholder": {
     "comingNext": "මෙම තිරය ගොඩනැගීමේ සැලැස්මේ ඊළඟට ඇත.",
