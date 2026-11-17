@@ -47,8 +47,9 @@
     "setupIntro": "Scan this QR code with an authenticator app such as Google Authenticator or Microsoft Authenticator. You'll need a code from it every time you sign in.",
     "setupManual": "Can't scan? Type this key into the app:",
     "setupConfirm": "Then type the 6-digit code the app shows.",
-    "setupError": "Couldn't start set-up. Refresh the page to try again.",
-    "loading": "Loading…"
+    "setupError": "Couldn't start set-up. Check your connection and try again.",
+    "loading": "Loading…",
+    "tryAgain": "Try again"
   },
   "calendar": {
     "months": [

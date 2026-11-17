@@ -14,10 +14,45 @@ type T = {
   setupManual: string;
   setupConfirm: string;
   setupError: string;
+  tryAgain: string;
   loading: string;
 };
 
 type Enrollment = { factorId: string; qr: string; secret: string };
+
+/** Removes set-ups that were started but never confirmed with a code. */
+async function clearUnverified(supabase: ReturnType<typeof createClient>) {
+  const { data } = await supabase.auth.mfa.listFactors();
+  for (const f of data?.all ?? []) {
+    if (f.factor_type === "totp" && f.status === "unverified") await supabase.auth.mfa.unenroll({ factorId: f.id });
+  }
+}
+
+async function enroll(): Promise<Enrollment | null> {
+  const supabase = createClient();
+  // A fixed issuer: by default Supabase uses the site address, and one with a
+  // port ("localhost:3000") makes Google Authenticator reject the QR code.
+  const options = { factorType: "totp", friendlyName: "Authenticator app", issuer: "Client Manager" } as const;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    await clearUnverified(supabase);
+    const { data, error } = await supabase.auth.mfa.enroll(options);
+    if (data && !error) return { factorId: data.id, qr: data.totp.qr_code, secret: data.totp.secret };
+    console.error("Two-step set-up failed:", error?.message);
+  }
+  return null;
+}
+
+// One set-up at a time per page load. React runs effects twice in
+// development, and two set-ups racing each other made Supabase refuse the
+// second ("a factor with this name already exists").
+let pending: Promise<Enrollment | null> | null = null;
+function startEnrollment() {
+  pending ??= enroll().then((result) => {
+    if (!result) pending = null; // let "Try again" start fresh
+    return result;
+  });
+  return pending;
+}
 
 export function MfaSetup({ lang, t }: { lang: Locale; t: T }) {
   const router = useRouter();
@@ -26,31 +61,19 @@ export function MfaSetup({ lang, t }: { lang: Locale; t: T }) {
   const [code, setCode] = useState("");
   const [error, setError] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
-    (async () => {
-      const supabase = createClient();
-      // Clear any half-finished set-up from an earlier visit first.
-      const { data: existing } = await supabase.auth.mfa.listFactors();
-      for (const f of existing?.all ?? []) {
-        if (f.status === "unverified") await supabase.auth.mfa.unenroll({ factorId: f.id });
-      }
-      // A fixed issuer: by default Supabase uses the site address, and one with a
-      // port ("localhost:3000") makes Google Authenticator reject the QR code.
-      const { data, error } = await supabase.auth.mfa.enroll({
-        factorType: "totp",
-        friendlyName: "Authenticator app",
-        issuer: "Client Manager",
-      });
+    startEnrollment().then((result) => {
       if (cancelled) return;
-      if (error || !data) setFailed(true);
-      else setEnrollment({ factorId: data.id, qr: data.totp.qr_code, secret: data.totp.secret });
-    })();
+      if (result) setEnrollment(result);
+      else setFailed(true);
+    });
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [attempt]);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -64,11 +87,28 @@ export function MfaSetup({ lang, t }: { lang: Locale; t: T }) {
       setBusy(false);
       return;
     }
+    pending = null;
     router.replace(`/${lang}`);
     router.refresh();
   }
 
-  if (failed) return <ErrorText>{t.setupError}</ErrorText>;
+  if (failed) {
+    return (
+      <div className="flex flex-col gap-3">
+        <ErrorText>{t.setupError}</ErrorText>
+        <button
+          type="button"
+          className="h-11 rounded-md border border-border bg-surface px-4 text-body font-medium"
+          onClick={() => {
+            setFailed(false);
+            setAttempt((n) => n + 1);
+          }}
+        >
+          {t.tryAgain}
+        </button>
+      </div>
+    );
+  }
   if (!enrollment) return <p className="text-body text-muted">{t.loading}</p>;
 
   return (
