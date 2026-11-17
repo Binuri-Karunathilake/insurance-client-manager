@@ -69,7 +69,8 @@ function pickLocale(request: NextRequest): Locale {
 
 export const config = {
   matcher: [
-    // Everything except Next.js internals, the manifest, icons and other static files.
-    "/((?!_next/static|_next/image|manifest.webmanifest|icons/|favicon.ico|.*\\.(?:png|svg|jpg|jpeg|webp|ico|woff2)$).*)",
+    // Everything except Next.js internals, API routes (they check their own
+    // secret), the manifest, the service worker, icons and other static files.
+    "/((?!_next/static|_next/image|api/|manifest.webmanifest|sw.js|icons/|favicon.ico|.*\\.(?:png|svg|jpg|jpeg|webp|ico|woff2)$).*)",
   ],
 };
