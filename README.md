@@ -114,7 +114,7 @@ The app holds NIC numbers, family details and sometimes health information, so:
 - no medical details in free-text notes; a reminder to keep only the medical documents a policy needs
 - documents are never public: private bucket, path checked on the server, links that expire in 2 minutes
 - the morning job uses the secret key only on the server, behind `CRON_SECRET`
-- daily database backups and an Excel export (planned) so the agent always owns a copy
+- daily database backups (Supabase) and an Excel export (**Settings → Download Excel copy**) so the agent always owns a copy; the file contains NIC numbers, so it is downloaded, never emailed
 - Sri Lanka's Personal Data Protection Act applies; insurer rules on where agents keep client documents are being checked before go-live
 
 ## Licences
