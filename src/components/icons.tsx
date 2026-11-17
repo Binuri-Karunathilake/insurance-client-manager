@@ -124,6 +124,19 @@ const paths = {
       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
     </>
   ),
+  undo: (
+    <>
+      <path d="M9 14 4 9l5-5" />
+      <path d="M4 9h11a5 5 0 0 1 0 10h-3" />
+    </>
+  ),
+  chart: (
+    <>
+      <path d="M3 3v18h18" />
+      <path d="M8 17v-5M13 17V8M18 17v-9" />
+    </>
+  ),
+  "chevron-left": <path d="m15 18-6-6 6-6" />,
 } as const;
 
 export type IconName = keyof typeof paths;
