@@ -36,7 +36,13 @@ export function MfaSetup({ lang, t }: { lang: Locale; t: T }) {
       for (const f of existing?.all ?? []) {
         if (f.status === "unverified") await supabase.auth.mfa.unenroll({ factorId: f.id });
       }
-      const { data, error } = await supabase.auth.mfa.enroll({ factorType: "totp", friendlyName: "Authenticator app" });
+      // A fixed issuer: by default Supabase uses the site address, and one with a
+      // port ("localhost:3000") makes Google Authenticator reject the QR code.
+      const { data, error } = await supabase.auth.mfa.enroll({
+        factorType: "totp",
+        friendlyName: "Authenticator app",
+        issuer: "Client Manager",
+      });
       if (cancelled) return;
       if (error || !data) setFailed(true);
       else setEnrollment({ factorId: data.id, qr: data.totp.qr_code, secret: data.totp.secret });
