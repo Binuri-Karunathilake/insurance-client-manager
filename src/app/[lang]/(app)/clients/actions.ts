@@ -56,7 +56,7 @@ export async function createClientAction(prev: ClientFormState, form: FormData):
     refresh();
     return { saved: { id: data.id, name: data.full_name, count: (prev.saved?.count ?? 0) + 1 } };
   }
-  redirect(`/${lang}/clients/${data.id}`);
+  redirect(form.get("add_policy") === "on" ? `/${lang}/clients/${data.id}/policies/new` : `/${lang}/clients/${data.id}`);
 }
 
 export async function updateClientAction(prev: ClientFormState, form: FormData): Promise<ClientFormState> {

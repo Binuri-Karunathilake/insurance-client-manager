@@ -32,7 +32,7 @@ phone / tablet ──► Next.js on Vercel ──► Supabase (Postgres + Auth +
 
 - **Every row belongs to an agency.** `agency_members` says who belongs to which agency, and row-level security on every table only lets members see and change their agency's rows. Today there is one member, the agent; adding an assistant later is one more row.
 - **Reminders are worked out, not typed.** The `due_items` view lists premiums due in the next 7 days, renewals in the next 30, client and family birthdays in the next 7, open follow-ups and anything overdue, all in Sri Lanka time. Only manual follow-ups are stored (`follow_ups`).
-- **Marking a premium paid** (`mark_premium_paid`) moves `next_due_date` forward by one payment period.
+- **Marking a premium paid** (`mark_premium_paid`) moves `next_due_date` to the next payment date, always counted from the start date so month-end dates don't drift (31 Jan → 28 Feb → 31 Mar).
 - **Documents** go in a private storage bucket under `<agency_id>/<client_id>/…`; files are only reachable through short-lived signed links.
 - **Sign-in is two steps.** Password, then a 6-digit code from an authenticator app. `proxy.ts` sends visitors to the right step, pages check again before reading data (`src/lib/auth.ts`), and the database checks a third time. The app signs out after 30 minutes without activity.
 - **Languages** live in the URL (`/en/…`, `/si/…`) with strings in `src/lib/dictionaries`. Fonts are Inter and Yaldevi (Sinhala), served from the repo.

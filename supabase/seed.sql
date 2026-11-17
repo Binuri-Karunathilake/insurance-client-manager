@@ -54,18 +54,21 @@ begin
     (target_agency, nimal, 'Kasun Perera', 'son', '2007-01-21'),
     (target_agency, nimal, 'Nethmi Perera', 'daughter', '2012-09-09');
 
+  -- Start dates are counted back from the due and renewal dates, so the
+  -- demo follows the same rule as real policies: payments fall on the
+  -- start date's day of the month.
   insert into public.policies
     (agency_id, client_id, insurer_id, policy_number, type, sum_assured, premium, frequency, start_date, next_due_date, renewal_date, status)
   values
-    (target_agency, nimal,    lanka_life,     'LL-2024-08812', 'life',     1500000, 4500,  'monthly', '2024-03-12', today + 2,  null,       'active'),
-    (target_agency, nimal,    ceylon_general, 'CG-M-55120',    'motor',    null,    38400, 'yearly',  '2023-12-02', null,       today + 22, 'active'),
-    (target_agency, kumari,   lanka_life,     'LL-2022-03144', 'life',     1000000, 4500,  'monthly', '2022-05-12', today + 2,  null,       'active'),
-    (target_agency, ruwan,    ceylon_general, 'CG-M-60218',    'motor',    null,    12800, 'quarterly','2025-02-05', today - 5,  today + 90, 'active'),
-    (target_agency, dilani,   lanka_life,     'LL-2021-11902', 'life',     2000000, 6200,  'monthly', '2021-08-20', today + 10, null,       'active'),
-    (target_agency, dilani,   union_care,     'UC-H-7731',     'health',   500000,  21000, 'yearly',  '2024-01-15', null,       today + 66, 'active'),
-    (target_agency, chaminda, ceylon_general, 'CG-P-1290',     'property', 8000000, 15500, 'yearly',  '2025-06-01', null,       today + 203,'active'),
-    (target_agency, sanduni,  ceylon_general, 'CG-M-48810',    'motor',    null,    29900, 'yearly',  '2022-04-10', null,       null,       'lapsed'),
-    (target_agency, tharindu, union_care,     'UC-H-8120',     'health',   750000,  18500, 'yearly',  '2024-11-28', null,       today + 18, 'active');
+    (target_agency, nimal,    lanka_life,     'LL-2024-08812', 'life',     1500000, 4500,  'monthly',   (today + 2 - interval '32 months')::date,  today + 2,  null,       'active'),
+    (target_agency, nimal,    ceylon_general, 'CG-M-55120',    'motor',    null,    38400, 'yearly',    (today + 22 - interval '3 years')::date,   null,       today + 22, 'active'),
+    (target_agency, kumari,   lanka_life,     'LL-2022-03144', 'life',     1000000, 4500,  'monthly',   (today + 2 - interval '54 months')::date,  today + 2,  null,       'active'),
+    (target_agency, ruwan,    ceylon_general, 'CG-M-60218',    'motor',    null,    12800, 'quarterly', (today - 5 - interval '21 months')::date,  today - 5,  (today - 5 - interval '21 months' + interval '2 years')::date, 'active'),
+    (target_agency, dilani,   lanka_life,     'LL-2021-11902', 'life',     2000000, 6200,  'monthly',   (today + 10 - interval '63 months')::date, today + 10, null,       'active'),
+    (target_agency, dilani,   union_care,     'UC-H-7731',     'health',   500000,  21000, 'yearly',    (today + 66 - interval '2 years')::date,   null,       today + 66, 'active'),
+    (target_agency, chaminda, ceylon_general, 'CG-P-1290',     'property', 8000000, 15500, 'yearly',    (today + 203 - interval '1 year')::date,   null,       today + 203,'active'),
+    (target_agency, sanduni,  ceylon_general, 'CG-M-48810',    'motor',    null,    29900, 'yearly',    '2022-04-10',                              null,       null,       'lapsed'),
+    (target_agency, tharindu, union_care,     'UC-H-8120',     'health',   750000,  18500, 'yearly',    (today + 18 - interval '2 years')::date,   null,       today + 18, 'active');
 
   insert into public.follow_ups (agency_id, client_id, due_date, note) values
     (target_agency, chaminda, today, 'Call back about home insurance quote'),
