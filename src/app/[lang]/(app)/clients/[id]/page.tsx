@@ -12,6 +12,9 @@ import { ButtonAnchor, ButtonLink } from "@/components/button";
 import { Icon } from "@/components/icons";
 import { AddFamilyForm, AddNoteForm, RemoveButton } from "./tab-forms";
 import { MarkPaidButton } from "./policies/mark-paid-button";
+import { DocumentGrid } from "@/components/document-grid";
+import { Uploader } from "../../documents/uploader";
+import { listClientDocuments } from "@/lib/data/documents";
 
 export const metadata: Metadata = { title: "Client" };
 
@@ -83,7 +86,7 @@ async function Profile({
 
       {tab === "policies" && <PoliciesTab client={client} lang={lang} dict={dict} />}
       {tab === "family" && <FamilyTab client={client} lang={lang} dict={dict} />}
-      {tab === "documents" && <p className="rounded-lg border border-border bg-surface p-6 text-body text-muted">{dict.profile.documentsSoon}</p>}
+      {tab === "documents" && <DocumentsTab clientId={client.id} lang={lang} dict={dict} />}
       {tab === "notes" && <NotesTab client={client} lang={lang} dict={dict} />}
     </>
   );
@@ -288,6 +291,24 @@ function NotesTab({ client, lang, dict }: { client: ClientProfile; lang: Locale;
             </li>
           ))}
         </ul>
+      )}
+    </div>
+  );
+}
+
+async function DocumentsTab({ clientId, lang, dict }: { clientId: string; lang: Locale; dict: Dictionary }) {
+  const docs = await listClientDocuments(clientId);
+  return (
+    <div className="flex flex-col gap-4">
+      <p className="flex items-center gap-2 rounded-md bg-primary-soft p-3 text-caption text-primary">
+        <Icon name="lock" size={16} className="shrink-0" />
+        {dict.documents.privacy}
+      </p>
+      <Uploader t={dict.documents} clientId={clientId} />
+      {docs.length === 0 ? (
+        <p className="rounded-lg border border-border bg-surface p-6 text-body text-muted">{dict.documents.emptyClient}</p>
+      ) : (
+        <DocumentGrid docs={docs} lang={lang} dict={dict} />
       )}
     </div>
   );

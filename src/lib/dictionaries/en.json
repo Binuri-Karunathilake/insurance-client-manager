@@ -28,12 +28,6 @@
     "seeAll": "See all",
     "allClear": "Nothing due this week."
   },
-  "placeholder": {
-    "comingNext": "This screen is next on the build plan.",
-    "clients": "Search and list clients, then open a client's profile with policies, family, documents and notes.",
-    "reminders": "Premiums, renewals, birthdays and follow-ups, grouped by day, with Call and WhatsApp buttons.",
-    "documents": "Photograph NIC copies, proposal forms and policies and file them under a client."
-  },
   "auth": {
     "signInTitle": "Sign in",
     "signInIntro": "Client records are private. Sign in with your email, password and authenticator app.",
@@ -186,7 +180,6 @@
     "noPolicies": "No policies yet.",
     "noFamily": "No family members added.",
     "noNotes": "No notes yet.",
-    "documentsSoon": "Photos of NIC copies, proposal forms and policy documents will be filed here.",
     "notFound": "This client doesn't exist or was removed.",
     "addPolicy": "Add policy"
   },

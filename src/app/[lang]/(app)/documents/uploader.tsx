@@ -128,7 +128,7 @@ export function Uploader({
       {error && step !== "ready" && <ErrorText>{t.errors[error]}</ErrorText>}
 
       {step === "idle" ? (
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-2 md:max-w-md">
           <Button icon="camera" onClick={() => camera.current?.click()}>
             {t.takePhoto}
           </Button>
