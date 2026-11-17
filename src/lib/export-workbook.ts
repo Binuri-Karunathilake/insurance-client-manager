@@ -53,9 +53,9 @@ export async function buildExportWorkbook(data: ExportData, dict: Dictionary, la
     ["", t.warningShort],
     ["", t.filesNote],
     [],
-    ...(["clients", "policies", "family", "followUps", "notes", "documents", "insurers"] as const).map((k) => [
+    ...(["clients", "policies", "payments", "family", "followUps", "notes", "documents", "insurers"] as const).map((k) => [
       t.sheets[k],
-      { clients: data.clients, policies: data.policies, family: data.family, followUps: data.followUps, notes: data.notes, documents: data.documents, insurers: data.insurers }[k].length,
+      { clients: data.clients, policies: data.policies, payments: data.payments, family: data.family, followUps: data.followUps, notes: data.notes, documents: data.documents, insurers: data.insurers }[k].length,
     ]),
   ]);
   about.getColumn(1).font = { bold: true };
@@ -114,6 +114,31 @@ export async function buildExportWorkbook(data: ExportData, dict: Dictionary, la
       toDate(p.next_due_date),
       toDate(p.renewal_date),
       dict.policy.status[p.status],
+    ]),
+  );
+
+  addSheet(
+    book,
+    t.sheets.payments,
+    [
+      { header: c.client, width: 24 },
+      { header: c.number, width: 16 },
+      { header: c.insurer, width: 26 },
+      { header: c.type, width: 11 },
+      { header: c.forDue, width: 14, kind: "date" },
+      { header: c.paidOn, width: 12, kind: "date" },
+      { header: c.amount, width: 12, kind: "money" },
+      { header: c.method, width: 14 },
+    ],
+    data.payments.map((p) => [
+      clientName(p.client_id),
+      p.policy?.policy_number ?? "",
+      p.policy?.insurer?.name ?? "",
+      p.policy ? dict.policyTypes[p.policy.type] : "",
+      toDate(p.due_date),
+      toDate(p.paid_on),
+      Number(p.amount),
+      dict.payments.methods[p.method],
     ]),
   );
 
