@@ -444,5 +444,56 @@
       "read": "Couldn't read this photo. Take it with the Take photo button instead.",
       "generic": "Couldn't upload. Check the internet connection and try again."
     }
+  },
+  "export": {
+    "title": "Your data",
+    "intro": "Download everything as an Excel file: clients, policies, family, follow-ups, notes and the list of documents. Keep a copy somewhere safe, such as your own computer.",
+    "warning": "The file contains NIC numbers and other personal details. Don't email or share it.",
+    "download": "Download Excel copy",
+    "filesNote": "Document photos aren't inside the file; it lists them. They stay in the app.",
+    "about": "About",
+    "exportedOn": "Exported on",
+    "source": "From",
+    "warningShort": "Contains personal data (NIC numbers, birthdays, family). Keep it private.",
+    "sheets": {
+      "clients": "Clients",
+      "policies": "Policies",
+      "family": "Family",
+      "followUps": "Follow-ups",
+      "notes": "Notes",
+      "documents": "Documents",
+      "insurers": "Insurers"
+    },
+    "cols": {
+      "client": "Client",
+      "name": "Name",
+      "mobile": "Mobile",
+      "whatsapp": "WhatsApp",
+      "nic": "NIC",
+      "dob": "Date of birth",
+      "address": "Address",
+      "language": "Language",
+      "added": "Added on",
+      "insurer": "Insurer",
+      "type": "Type",
+      "number": "Policy no.",
+      "sumAssured": "Sum assured",
+      "premium": "Premium",
+      "pays": "Pays",
+      "start": "Start date",
+      "nextDue": "Next due",
+      "renewal": "Renewal",
+      "status": "Status",
+      "relationship": "Relationship",
+      "due": "Due",
+      "note": "Note",
+      "doneOn": "Done on",
+      "date": "Date",
+      "fileType": "File type",
+      "sizeKb": "Size (KB)",
+      "branch": "Branch",
+      "phone": "Phone"
+    },
+    "sameAsMobile": "Same as mobile"
   }
 }
