@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { connection } from "next/server";
 import { getDictionary, getLocale, type Dictionary } from "@/lib/i18n";
 import { getMonthlyReport } from "@/lib/data/report";
 import { colomboToday, daysUntil, formatDate, formatMoney, formatMonth } from "@/lib/format";
@@ -34,7 +35,8 @@ async function Report({
   searchParams: PageProps<"/[lang]/reports">["searchParams"];
 }) {
   const t = dict.report;
-  const sp = await searchParams; // request time from here on, so "today" is today's
+  const sp = await searchParams;
+  await connection(); // "this month" is read at request time, never baked into a prebuilt page
   const current = monthOf(colomboToday());
   const month = pickMonth(sp.month, current);
   const { payments, previousTotal, unpaid, unpaidTotal } = await getMonthlyReport(month);
