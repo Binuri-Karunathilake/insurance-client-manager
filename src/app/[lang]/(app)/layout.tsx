@@ -1,5 +1,7 @@
 import { getDictionary, getLocale } from "@/lib/i18n";
 import { BottomNav, SidebarNav } from "@/components/nav";
+import Link from "next/link";
+import { Icon } from "@/components/icons";
 import { IdleSignOut, LanguageSwitch, SignOutButton } from "@/components/session-controls";
 
 export default async function AppLayout({ children }: LayoutProps<"/[lang]">) {
@@ -16,6 +18,13 @@ export default async function AppLayout({ children }: LayoutProps<"/[lang]">) {
         </div>
         <SidebarNav lang={lang} labels={dict.nav} />
         <div className="mt-auto flex flex-col gap-1 border-t border-border pt-3">
+          <Link
+            href={`/${lang}/settings`}
+            className="flex h-11 items-center gap-2 rounded-md px-3 text-body text-muted hover:bg-bg hover:text-text"
+          >
+            <Icon name="settings" size={20} />
+            {dict.settings.nav}
+          </Link>
           <LanguageSwitch lang={lang} label={dict.app.switchLanguage} />
           <SignOutButton lang={lang} label={dict.app.signOut} />
         </div>

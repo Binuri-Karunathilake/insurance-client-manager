@@ -20,9 +20,18 @@ export default async function TodayPage() {
 
   return (
     <div className="mx-auto flex max-w-5xl flex-col gap-6">
-      <div className="flex items-center justify-between gap-3 md:hidden">
+      <div className="flex items-center justify-between gap-1 md:hidden">
         <LanguageSwitch lang={lang} label={dict.app.switchLanguage} />
-        <SignOutButton lang={lang} label={dict.app.signOut} />
+        <div className="flex items-center gap-1">
+          <Link
+            href={`/${lang}/settings`}
+            aria-label={dict.settings.nav}
+            className="flex size-11 items-center justify-center rounded-md text-muted hover:bg-bg hover:text-text"
+          >
+            <Icon name="settings" size={20} />
+          </Link>
+          <SignOutButton lang={lang} label={dict.app.signOut} />
+        </div>
       </div>
 
       <div className="flex items-center gap-3">
