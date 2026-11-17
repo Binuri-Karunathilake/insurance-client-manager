@@ -20,7 +20,13 @@
     "birthdays": "Birthdays this week",
     "overdue": "Overdue",
     "loadError": "Couldn't load today's items. Check the Supabase setup in the README.",
-    "addClient": "Add client"
+    "addClient": "Add client",
+    "dueThisWeek": "Due this week",
+    "overdueList": "Overdue",
+    "birthdaysList": "Birthdays",
+    "renewalsList": "Renewals this month",
+    "seeAll": "See all",
+    "allClear": "Nothing due this week."
   },
   "placeholder": {
     "comingNext": "This screen is next on the build plan.",
@@ -299,6 +305,53 @@
       "dueBeforeStart": "This can't be before the start date.",
       "insurerName": "Enter the company name.",
       "generic": "Couldn't save. Check your connection and try again."
+    }
+  },
+  "reminders": {
+    "title": "Reminders",
+    "summary": "{n} coming up · {late} overdue",
+    "views": {
+      "upcoming": "Coming up",
+      "overdue": "Overdue"
+    },
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "inDays": "In {n} days",
+    "daysLate": "{n} days late",
+    "dayLate": "1 day late",
+    "premium": "{type} premium {amount}",
+    "renewal": "{type} renewal",
+    "birthday": "Birthday · turns {n}",
+    "familyBirthday": "{member} ({relationship}) · turns {n}",
+    "call": "Call",
+    "whatsapp": "WhatsApp",
+    "addFollowUp": "Follow-up",
+    "emptyUpcoming": "Nothing due in the next 7 days, and no renewals this month.",
+    "emptyOverdue": "Nothing overdue. Well done.",
+    "loadError": "Couldn't load reminders. Check your connection and try again.",
+    "paid": "Paid",
+    "confirmPaid": "Tap again: paid",
+    "renewed": "Renewed",
+    "confirmRenewed": "Tap again: renewed",
+    "done": "Done",
+    "confirmDone": "Tap again: done"
+  },
+  "followUp": {
+    "title": "New follow-up",
+    "client": "Client",
+    "chooseClient": "Choose a client",
+    "date": "When",
+    "note": "What to do",
+    "notePlaceholder": "e.g. Call back about the motor quote",
+    "save": "Save follow-up",
+    "saving": "Saving…",
+    "cancel": "Cancel",
+    "add": "Follow-up",
+    "errors": {
+      "clientRequired": "Choose the client.",
+      "dateInvalid": "Choose today or a later date.",
+      "noteRequired": "Write what needs doing.",
+      "generic": "Couldn't save. Try again."
     }
   }
 }

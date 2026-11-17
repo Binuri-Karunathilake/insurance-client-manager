@@ -119,6 +119,9 @@ function ClientHeader({ client, lang, dict }: { client: ClientProfile; lang: Loc
       </div>
 
       <div className="grid grid-cols-2 gap-2 md:flex md:justify-start">
+        <ButtonLink href={`/${lang}/reminders/new?client=${client.id}`} variant="secondary" icon="bell" className="order-last col-span-2">
+          {dict.followUp.add}
+        </ButtonLink>
         {tel && (
           <ButtonAnchor href={tel} variant="outline" icon="phone">
             {t.call}
@@ -197,11 +200,11 @@ function PolicyCard({
     [
       t.premium,
       policy.frequency === "single"
-        ? `${formatMoney(policy.premium)} · ${t.frequency.single}`
-        : `${formatMoney(policy.premium)} ${t.frequency[policy.frequency]}`,
+        ? `${formatMoney(policy.premium, lang)} · ${t.frequency.single}`
+        : `${formatMoney(policy.premium, lang)} ${t.frequency[policy.frequency]}`,
     ],
   ];
-  if (policy.sum_assured) rows.push([t.sumAssured, formatMoney(policy.sum_assured)]);
+  if (policy.sum_assured) rows.push([t.sumAssured, formatMoney(policy.sum_assured, lang)]);
   if (policy.next_due_date) rows.push([t.nextDue, formatDate(policy.next_due_date, dict.calendar, lang)]);
   if (policy.renewal_date) rows.push([t.renewal, formatDate(policy.renewal_date, dict.calendar, lang)]);
 

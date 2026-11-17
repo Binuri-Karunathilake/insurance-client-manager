@@ -309,7 +309,7 @@ function Schedule({
           {dates.map((d, i) => (
             <li key={d} className="flex justify-between border-b border-border py-2 last:border-b-0">
               <span className={i === 0 ? "font-medium" : ""}>{formatDate(d, dict.calendar, lang)}</span>
-              {premium ? <span className="text-muted">{formatMoney(premium)}</span> : null}
+              {premium ? <span className="text-muted">{formatMoney(premium, lang)}</span> : null}
             </li>
           ))}
         </ul>

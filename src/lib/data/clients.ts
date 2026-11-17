@@ -144,3 +144,11 @@ export async function listAddedToday(): Promise<Pick<Client, "id" | "full_name" 
     .limit(20);
   return (data ?? []) as Pick<Client, "id" | "full_name" | "mobile">[];
 }
+
+/** Every client's name and phone, for pickers. */
+export async function listClientOptions(): Promise<Pick<Client, "id" | "full_name" | "mobile">[]> {
+  await getCurrentUser();
+  const supabase = await createClient();
+  const { data } = await supabase.from("clients").select("id, full_name, mobile").order("full_name").limit(2000);
+  return (data ?? []) as Pick<Client, "id" | "full_name" | "mobile">[];
+}

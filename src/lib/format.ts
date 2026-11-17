@@ -1,9 +1,10 @@
 import type { Dictionary } from "./i18n";
 
-/** 4500 -> "Rs. 4,500" (whole rupees; cents only when there are any) */
-export function formatMoney(amount: number): string {
+/** 4500 -> "Rs. 4,500" / "රු. 4,500" (whole rupees; cents only when there are any) */
+export function formatMoney(amount: number, lang: "en" | "si" = "en"): string {
   const hasCents = Math.round(amount * 100) % 100 !== 0;
-  return `Rs. ${amount.toLocaleString("en-LK", { minimumFractionDigits: hasCents ? 2 : 0, maximumFractionDigits: 2 })}`;
+  const digits = amount.toLocaleString("en-LK", { minimumFractionDigits: hasCents ? 2 : 0, maximumFractionDigits: 2 });
+  return `${lang === "si" ? "රු." : "Rs."} ${digits}`;
 }
 
 /** "2026-11-12" -> "12 Nov 2026" / "2026 නොවැ. 12" */

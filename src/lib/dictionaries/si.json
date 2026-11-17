@@ -20,7 +20,13 @@
     "birthdays": "මේ සතියේ උපන්දින",
     "overdue": "ප්‍රමාද වූ",
     "loadError": "අද අයිතම පූරණය කළ නොහැකි විය. README හි Supabase සැකසුම පරීක්ෂා කරන්න.",
-    "addClient": "නව ගනුදෙනුකරු"
+    "addClient": "නව ගනුදෙනුකරු",
+    "dueThisWeek": "මේ සතියේ ගෙවිය යුතු",
+    "overdueList": "ප්‍රමාද වූ",
+    "birthdaysList": "උපන්දින",
+    "renewalsList": "මේ මාසයේ අලුත් කිරීම්",
+    "seeAll": "සියල්ල බලන්න",
+    "allClear": "මේ සතියේ ගෙවීම් නැත."
   },
   "placeholder": {
     "comingNext": "මෙම තිරය ගොඩනැගීමේ සැලැස්මේ ඊළඟට ඇත.",
@@ -299,6 +305,53 @@
       "dueBeforeStart": "මෙය ආරම්භක දිනයට පෙර විය නොහැක.",
       "insurerName": "සමාගමේ නම ඇතුළත් කරන්න.",
       "generic": "සුරැකිය නොහැකි විය. සම්බන්ධතාවය පරීක්ෂා කර නැවත උත්සාහ කරන්න."
+    }
+  },
+  "reminders": {
+    "title": "මතක් කිරීම්",
+    "summary": "ඉදිරියට {n} · ප්‍රමාද {late}",
+    "views": {
+      "upcoming": "ඉදිරියට",
+      "overdue": "ප්‍රමාද"
+    },
+    "today": "අද",
+    "tomorrow": "හෙට",
+    "inDays": "දින {n}කින්",
+    "daysLate": "දින {n}ක් ප්‍රමාදයි",
+    "dayLate": "දින 1ක් ප්‍රමාදයි",
+    "premium": "{type} වාරිකය {amount}",
+    "renewal": "{type} අලුත් කිරීම",
+    "birthday": "උපන්දිනය · වයස {n}",
+    "familyBirthday": "{member} ({relationship}) · වයස {n}",
+    "call": "අමතන්න",
+    "whatsapp": "WhatsApp",
+    "addFollowUp": "පසු විපරම",
+    "emptyUpcoming": "ඉදිරි දින 7 තුළ ගෙවීම් නැත, මේ මාසයේ අලුත් කිරීම් ද නැත.",
+    "emptyOverdue": "ප්‍රමාද වූ කිසිවක් නැත.",
+    "loadError": "මතක් කිරීම් පූරණය කළ නොහැකි විය. සම්බන්ධතාවය පරීක්ෂා කර නැවත උත්සාහ කරන්න.",
+    "paid": "ගෙව්වා",
+    "confirmPaid": "තහවුරු කිරීමට නැවත ඔබන්න",
+    "renewed": "අලුත් කළා",
+    "confirmRenewed": "තහවුරු කිරීමට නැවත ඔබන්න",
+    "done": "අවසන්",
+    "confirmDone": "තහවුරු කිරීමට නැවත ඔබන්න"
+  },
+  "followUp": {
+    "title": "නව පසු විපරම",
+    "client": "ගනුදෙනුකරු",
+    "chooseClient": "ගනුදෙනුකරුවෙකු තෝරන්න",
+    "date": "කවදාද",
+    "note": "කළ යුත්ත",
+    "notePlaceholder": "උදා. මෝටර් මිල ගණන් ගැන නැවත අමතන්න",
+    "save": "පසු විපරම සුරකින්න",
+    "saving": "සුරකිමින්…",
+    "cancel": "අවලංගු කරන්න",
+    "add": "පසු විපරම",
+    "errors": {
+      "clientRequired": "ගනුදෙනුකරු තෝරන්න.",
+      "dateInvalid": "අද හෝ ඉදිරි දිනයක් තෝරන්න.",
+      "noteRequired": "කළ යුත්ත ලියන්න.",
+      "generic": "සුරැකිය නොහැකි විය. නැවත උත්සාහ කරන්න."
     }
   }
 }
