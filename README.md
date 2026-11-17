@@ -13,8 +13,8 @@ A mobile-first web app for an independent insurance agent in Sri Lanka: client r
 | Clients and policies screens | Done |
 | Reminders: Reminders and Today screens, WhatsApp messages, follow-ups | Done |
 | Morning notifications: push and email, Settings screen | Done (switch on below) |
-| Documents: camera upload and gallery | Next |
-| Test with demo data, then go live | |
+| Documents: camera upload, on-phone photo shrinking, private gallery | Done |
+| Test with demo data, then go live | Next |
 
 ## Stack
 
@@ -34,7 +34,7 @@ phone / tablet ──► Next.js on Vercel ──► Supabase (Postgres + Auth +
 - **Every row belongs to an agency.** `agency_members` says who belongs to which agency, and row-level security on every table only lets members see and change their agency's rows. Today there is one member, the agent; adding an assistant later is one more row.
 - **Reminders are worked out, not typed.** The `due_items` view lists premiums due in the next 7 days, renewals in the next 30, client and family birthdays in the next 7, open follow-ups and anything overdue, all in Sri Lanka time. Only manual follow-ups are stored (`follow_ups`).
 - **Marking a premium paid** (`mark_premium_paid`) moves `next_due_date` to the next payment date, always counted from the start date so month-end dates don't drift (31 Jan → 28 Feb → 31 Mar).
-- **Documents** go in a private storage bucket under `<agency_id>/<client_id>/…`; files are only reachable through short-lived signed links.
+- **Documents** go in a private storage bucket under `<agency_id>/<client_id>/<random>.jpg`. Photos are shrunk on the phone first (longest side 1600 px, about 200–500 KB). The server picks the path and hands the browser a one-time upload token, then checks the file arrived before recording it. Opening a document goes through `/[lang]/documents/file/[id]`, which checks access and redirects to a storage link that expires in 2 minutes.
 - **Sign-in is two steps.** Password, then a 6-digit code from an authenticator app. `proxy.ts` sends visitors to the right step, pages check again before reading data (`src/lib/auth.ts`), and the database checks a third time. The app signs out after 30 minutes without activity.
 - **Languages** live in the URL (`/en/…`, `/si/…`) with strings in `src/lib/dictionaries`. Fonts are Inter and Yaldevi (Sinhala), served from the repo.
 
@@ -94,6 +94,7 @@ src/
   app/api/cron/morning/      the daily notification job
   lib/digest.ts              the morning summary (push and email text)
   lib/morning-job.ts         who gets what, push and email sending
+  lib/shrink-image.ts        shrinks photos in the browser before upload
   components/                navigation, icons, form controls
   lib/supabase/              Supabase clients for browser, server and proxy
   lib/auth.ts                current user (requires two-step sign-in)
@@ -110,7 +111,8 @@ The app holds NIC numbers, family details and sometimes health information, so:
 - only the agent's own account can sign in; public sign-up is off
 - two-step sign-in is required for every session
 - row-level security on every table and on file storage
-- no medical details in free-text notes
+- no medical details in free-text notes; a reminder to keep only the medical documents a policy needs
+- documents are never public: private bucket, path checked on the server, links that expire in 2 minutes
 - the morning job uses the secret key only on the server, behind `CRON_SECRET`
 - daily database backups and an Excel export (planned) so the agent always owns a copy
 - Sri Lanka's Personal Data Protection Act applies; insurer rules on where agents keep client documents are being checked before go-live
