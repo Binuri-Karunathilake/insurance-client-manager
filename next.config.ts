@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
+  // Don't write an AGENTS.md into the repo when the dev server starts.
+  agentRules: false,
   turbopack: {
     rules: {
       "*.css": {
