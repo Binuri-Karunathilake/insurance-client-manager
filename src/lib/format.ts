@@ -34,3 +34,9 @@ export function ageFrom(dob: string): number {
   if (today.slice(5) < dob.slice(5, 10)) age -= 1;
   return age;
 }
+
+/** "2026-11" -> "November 2026" / "2026 නොවැම්බර්" */
+export function formatMonth(month: string, calendar: Dictionary["calendar"], lang: "en" | "si"): string {
+  const [y, m] = month.split("-").map(Number);
+  return lang === "si" ? `${y} ${calendar.months[m - 1]}` : `${calendar.months[m - 1]} ${y}`;
+}

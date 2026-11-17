@@ -1,9 +1,13 @@
 import { Suspense } from "react";
 import Link from "next/link";
+import { connection } from "next/server";
 import type { Metadata } from "next";
 import { getCurrentUser } from "@/lib/auth";
 import { getDictionary, getLocale, type Dictionary } from "@/lib/i18n";
 import { listReminders, type Reminder } from "@/lib/data/reminders";
+import { getMonthTotal } from "@/lib/data/report";
+import { colomboToday, formatMoney, formatMonth } from "@/lib/format";
+import { fill } from "@/lib/text";
 import { reminderMessage } from "@/lib/messages";
 import type { Locale } from "@/lib/locales";
 import { Avatar, Chip } from "@/components/chip";
@@ -23,6 +27,13 @@ export default async function TodayPage() {
       <div className="flex items-center justify-between gap-1 md:hidden">
         <LanguageSwitch lang={lang} label={dict.app.switchLanguage} />
         <div className="flex items-center gap-1">
+          <Link
+            href={`/${lang}/reports`}
+            aria-label={dict.report.nav}
+            className="flex size-11 items-center justify-center rounded-md text-muted hover:bg-bg hover:text-text"
+          >
+            <Icon name="chart" size={20} />
+          </Link>
           <Link
             href={`/${lang}/settings`}
             aria-label={dict.settings.nav}
@@ -136,6 +147,10 @@ async function TodayBody({ lang, dict }: { lang: Locale; dict: Dictionary }) {
         ))}
       </section>
 
+      <Suspense fallback={<div className="h-16 animate-pulse rounded-lg border border-border bg-surface" />}>
+        <MonthCollected lang={lang} dict={dict} />
+      </Suspense>
+
       <div className="flex flex-col gap-6 md:flex-row md:items-start">
         <div className="flex min-w-0 flex-1 flex-col gap-6">
           {overdue.length > 0 && (
@@ -177,6 +192,34 @@ async function TodayBody({ lang, dict }: { lang: Locale; dict: Dictionary }) {
         )}
       </div>
     </>
+  );
+}
+
+/** "Collected in November: Rs. 139,000" with a link to the monthly report. */
+async function MonthCollected({ lang, dict }: { lang: Locale; dict: Dictionary }) {
+  await connection();
+  const month = colomboToday().slice(0, 7);
+  const { total, count } = await getMonthTotal(month);
+  const t = dict.report;
+  return (
+    <Link
+      href={`/${lang}/reports`}
+      className="flex items-center gap-3 rounded-lg border border-border bg-surface px-4 py-3 hover:border-primary/40"
+    >
+      <span className="flex size-10 shrink-0 items-center justify-center rounded-md bg-primary-soft text-primary">
+        <Icon name="chart" size={20} />
+      </span>
+      <span className="flex min-w-0 flex-1 flex-col">
+        <span className="text-caption text-muted">{fill(t.today, { month: formatMonth(month, dict.calendar, lang) })}</span>
+        <span className="text-body font-medium">
+          {formatMoney(total, lang)} <span className="text-caption font-normal text-muted">· {count === 1 ? t.countOne : fill(t.count, { n: count })}</span>
+        </span>
+      </span>
+      <span className="flex items-center gap-1 text-caption font-medium text-primary">
+        {t.seeReport}
+        <Icon name="chevron-right" size={16} />
+      </span>
+    </Link>
   );
 }
 
