@@ -411,5 +411,45 @@
     "testNothing": "Nothing is due in the next 7 days, so there's nothing to send.",
     "testFailed": "Couldn't send. Check the notification keys.",
     "deviceFailed": "Couldn't turn notifications on. Check the internet connection and try again."
+  },
+  "documents": {
+    "title": "Documents",
+    "intro": "NIC copies, proposal forms and policies",
+    "privacy": "Private. Files open only for your account, through links that expire.",
+    "takePhoto": "Take photo",
+    "uploadFile": "Upload file",
+    "recent": "Recent",
+    "empty": "No documents yet.",
+    "emptyClient": "No documents for this client yet.",
+    "client": "Client",
+    "chooseClient": "Choose a client",
+    "label": "What is it?",
+    "name": "Name",
+    "save": "Save document",
+    "cancel": "Cancel",
+    "shrinking": "Preparing photo…",
+    "uploading": "Uploading…",
+    "saving": "Saving…",
+    "saved": "Saved {name}.",
+    "medicalHint": "Only keep medical documents a policy needs.",
+    "open": "Open",
+    "remove": "Delete",
+    "confirmRemove": "Tap again to delete",
+    "labels": {
+      "nic": "NIC copy",
+      "proposal": "Proposal form",
+      "policy": "Policy document",
+      "vehicle": "Vehicle registration",
+      "medical": "Medical report",
+      "receipt": "Receipt",
+      "other": "Other"
+    },
+    "errors": {
+      "type": "Use a photo (JPEG, PNG, WebP) or a PDF.",
+      "size": "The file is over 10 MB.",
+      "client": "Choose the client.",
+      "read": "Couldn't read this photo. Take it with the Take photo button instead.",
+      "generic": "Couldn't upload. Check the internet connection and try again."
+    }
   }
 }
