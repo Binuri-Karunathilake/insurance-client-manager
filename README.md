@@ -16,6 +16,7 @@ A mobile-first web app for an independent insurance agent in Sri Lanka: client r
 | Documents: camera upload, on-phone photo shrinking, private gallery | Done |
 | Excel copy of all data (Settings) | Done |
 | Payment history, undo, monthly report | Done |
+| Excel import of existing clients and policies | Done |
 | Test with demo data, then go live | Next |
 
 ## Stack
@@ -36,6 +37,7 @@ phone / tablet ──► Next.js on Vercel ──► Supabase (Postgres + Auth +
 - **Every row belongs to an agency.** `agency_members` says who belongs to which agency, and row-level security on every table only lets members see and change their agency's rows. Today there is one member, the agent; adding an assistant later is one more row.
 - **Reminders are worked out, not typed.** The `due_items` view lists premiums due in the next 7 days, renewals in the next 30, client and family birthdays in the next 7, open follow-ups and anything overdue, all in Sri Lanka time. Only manual follow-ups are stored (`follow_ups`).
 - **Marking a premium paid** (`mark_premium_paid`) saves a row in `payments` (amount, method, date paid, and which due date it covers) and moves `next_due_date` to the next payment date, always counted from the start date so month-end dates don't drift (31 Jan → 28 Feb → 31 Mar). On the client profile the amount, method and date can be changed before saving; the quick **Paid** button on Reminders uses the premium, cash and today. `undo_payment` takes back a policy's latest payment and puts its due date back.
+- **Excel import** (`/[lang]/clients/import`): reads an `.xlsx` or `.csv` file on the server (up to 2 MB, 3,000 rows), matches column headings in English or Sinhala, and checks every row with the same rules as the forms. The preview shows new clients, new policies, rows already in the app and rows with problems; `import_clients` then adds everything in one transaction. A client already in the app (same NIC, or same mobile and name) only gets the new policies, and policy numbers already saved are skipped, so importing the same file twice adds nothing. Rules live in `src/lib/import.ts`.
 - **Monthly report** (`/[lang]/reports`): premiums collected in a month by insurer, policy type and payment method, compared with the month before, plus what's still unpaid by the month end.
 - **Documents** go in a private storage bucket under `<agency_id>/<client_id>/<random>.jpg`. Photos are shrunk on the phone first (longest side 1600 px, about 200–500 KB). The server picks the path and hands the browser a one-time upload token, then checks the file arrived before recording it. Opening a document goes through `/[lang]/documents/file/[id]`, which checks access and redirects to a storage link that expires in 2 minutes.
 - **Sign-in is two steps.** Password, then a 6-digit code from an authenticator app. `proxy.ts` sends visitors to the right step, pages check again before reading data (`src/lib/auth.ts`), and the database checks a third time. The app signs out after 30 minutes without activity.
@@ -104,6 +106,7 @@ src/
   lib/digest.ts              the morning summary (push and email text)
   lib/morning-job.ts         who gets what, push and email sending
   lib/report.ts              monthly report sums
+  lib/import.ts              Excel import: column matching, row checks, plan
   lib/shrink-image.ts        shrinks photos in the browser before upload
   components/                navigation, icons, form controls
   lib/supabase/              Supabase clients for browser, server and proxy
@@ -124,6 +127,7 @@ The app holds NIC numbers, family details and sometimes health information, so:
 - no medical details in free-text notes; a reminder to keep only the medical documents a policy needs
 - documents are never public: private bucket, path checked on the server, links that expire in 2 minutes
 - the morning job uses the secret key only on the server, behind `CRON_SECRET`
+- Excel import: the file is read in memory and not stored; only the imported rows are saved
 - daily database backups (Supabase) and an Excel export (**Settings → Download Excel copy**) so the agent always owns a copy; the file contains NIC numbers, so it is downloaded, never emailed
 - Sri Lanka's Personal Data Protection Act applies; insurer rules on where agents keep client documents are being checked before go-live
 

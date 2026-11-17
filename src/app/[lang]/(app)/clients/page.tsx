@@ -23,7 +23,13 @@ export default async function ClientsPage({ searchParams }: PageProps<"/[lang]/c
     <div className="mx-auto flex max-w-3xl flex-col gap-4 pb-20 md:pb-0">
       <header className="flex items-center gap-3">
         <h1 className="flex-1 text-title">{dict.clients.title}</h1>
-        <div className="hidden md:block">
+        <ButtonLink href={`/${lang}/clients/import`} variant="outline" icon="upload" aria-label={dict.import.button} className="md:hidden">
+          Excel
+        </ButtonLink>
+        <div className="hidden gap-3 md:flex">
+          <ButtonLink href={`/${lang}/clients/import`} variant="outline" icon="upload">
+            {dict.import.button}
+          </ButtonLink>
           <ButtonLink href={`/${lang}/clients/new`} icon="plus">
             {dict.clients.add}
           </ButtonLink>
@@ -151,9 +157,14 @@ function Empty({ dict, q, filter, lang }: { dict: Dictionary; q: string; filter:
     <div className="flex flex-col items-start gap-3 rounded-lg border border-border bg-surface p-6">
       <h2 className="text-heading">{dict.clients.emptyTitle}</h2>
       <p className="text-body text-muted">{dict.clients.emptyBody}</p>
-      <ButtonLink href={`/${lang}/clients/new`} icon="plus">
-        {dict.clients.add}
-      </ButtonLink>
+      <div className="flex flex-wrap gap-3">
+        <ButtonLink href={`/${lang}/clients/new`} icon="plus">
+          {dict.clients.add}
+        </ButtonLink>
+        <ButtonLink href={`/${lang}/clients/import`} variant="outline" icon="upload">
+          {dict.import.button}
+        </ButtonLink>
+      </div>
     </div>
   );
 }
