@@ -59,3 +59,14 @@ export type DueItem = {
 
 /** The one chip shown next to a client in lists. */
 export type ClientStatus = "overdue" | "due" | "birthday" | "lapsed";
+
+export type PaymentMethod = "cash" | "bank" | "online" | "cheque" | "other";
+export const PAYMENT_METHODS: readonly PaymentMethod[] = ["cash", "bank", "online", "cheque", "other"];
+
+export type Payment = {
+  id: string;
+  amount: number;
+  due_date: string;
+  paid_on: string;
+  method: PaymentMethod;
+};

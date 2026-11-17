@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/server";
 import { notificationsConfigured } from "@/lib/notify";
 import { fill } from "@/lib/text";
 import type { Locale } from "@/lib/locales";
+import { Icon } from "@/components/icons";
 import { DeviceToggle, PreferencesForm, SendTest } from "./settings-forms";
 
 export const metadata: Metadata = { title: "Settings" };
@@ -64,6 +65,20 @@ async function Settings({ lang, dict }: { lang: Locale; dict: Dictionary }) {
           language={(settings?.language as "si" | "en" | undefined) ?? lang}
           email={user.email}
         />
+      </Card>
+
+      <Card title={dict.export.title}>
+        <p className="-mt-2 text-body text-muted">{dict.export.intro}</p>
+        <p className="rounded-md bg-warning-soft p-3 text-caption text-warning">{dict.export.warning}</p>
+        <a
+          href={`/${lang}/settings/export`}
+          download
+          className="inline-flex h-11 items-center justify-center gap-2 self-start rounded-md bg-primary px-4 text-body font-medium text-on-primary hover:bg-primary/90"
+        >
+          <Icon name="download" size={20} />
+          {dict.export.download}
+        </a>
+        <p className="text-caption text-muted">{dict.export.filesNote}</p>
       </Card>
 
       {(configured.push || configured.email) && (

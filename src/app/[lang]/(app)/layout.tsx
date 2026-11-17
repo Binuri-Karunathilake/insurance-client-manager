@@ -19,6 +19,13 @@ export default async function AppLayout({ children }: LayoutProps<"/[lang]">) {
         <SidebarNav lang={lang} labels={dict.nav} />
         <div className="mt-auto flex flex-col gap-1 border-t border-border pt-3">
           <Link
+            href={`/${lang}/reports`}
+            className="flex h-11 items-center gap-2 rounded-md px-3 text-body text-muted hover:bg-bg hover:text-text"
+          >
+            <Icon name="chart" size={20} />
+            {dict.report.nav}
+          </Link>
+          <Link
             href={`/${lang}/settings`}
             className="flex h-11 items-center gap-2 rounded-md px-3 text-body text-muted hover:bg-bg hover:text-text"
           >

@@ -21,3 +21,8 @@ export async function getLocale(): Promise<Locale> {
 export async function getDictionary(): Promise<Dictionary> {
   return dictionaries[await getLocale()]();
 }
+
+/** For route handlers, which can't read the locale from root params yet: pass it from params. */
+export async function dictionaryFor(locale: Locale): Promise<Dictionary> {
+  return dictionaries[locale]();
+}

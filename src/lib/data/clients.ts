@@ -1,7 +1,7 @@
 import "server-only";
 import { getCurrentUser } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
-import type { Client, ClientNote, ClientStatus, DueItem, FamilyMember, Insurer, Policy } from "@/lib/types";
+import type { Client, ClientNote, ClientStatus, DueItem, FamilyMember, Insurer, Payment, Policy } from "@/lib/types";
 
 export const CLIENT_FILTERS = ["all", "due", "overdue", "birthday", "lapsed"] as const;
 export type ClientFilter = (typeof CLIENT_FILTERS)[number];
@@ -92,8 +92,11 @@ export async function listClients({ q = "", filter = "all", limit = PAGE_SIZE }:
   return { rows, total: count ?? rows.length };
 }
 
+/** Latest payments shown per policy; the monthly report and Excel copy have the rest. */
+export const PAYMENTS_SHOWN = 12;
+
 export type ClientProfile = Client & {
-  policies: (Policy & { insurer: Pick<Insurer, "name"> | null })[];
+  policies: (Policy & { insurer: Pick<Insurer, "name"> | null; payments: Payment[] })[];
   family_members: FamilyMember[];
   client_notes: ClientNote[];
   documents: { count: number }[];
@@ -109,10 +112,13 @@ export async function getClientProfile(id: string): Promise<{ client: ClientProf
       .from("clients")
       .select(
         "id, full_name, mobile, whatsapp, nic, date_of_birth, address, preferred_language, created_at," +
-          " policies(*, insurer:insurers(name)), family_members(*), client_notes(id, client_id, body, created_at), documents(count)",
+          " policies(*, insurer:insurers(name), payments(id, amount, due_date, paid_on, method)), family_members(*), client_notes(id, client_id, body, created_at), documents(count)",
       )
       .eq("id", id)
       .order("start_date", { referencedTable: "policies", ascending: false })
+      .order("due_date", { referencedTable: "policies.payments", ascending: false })
+      .order("created_at", { referencedTable: "policies.payments", ascending: false })
+      .limit(PAYMENTS_SHOWN, { referencedTable: "policies.payments" })
       .order("created_at", { referencedTable: "client_notes", ascending: false })
       .order("full_name", { referencedTable: "family_members" })
       .maybeSingle(),

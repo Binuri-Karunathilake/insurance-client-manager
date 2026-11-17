@@ -6,6 +6,8 @@ import { requireUser } from "@/lib/auth";
 import { getAgencyId } from "@/lib/data/agency";
 import { createClient } from "@/lib/supabase/server";
 import { hasLocale } from "@/lib/locales";
+import { colomboToday } from "@/lib/format";
+import { paymentFromForm, type PaymentErrorKey } from "@/lib/validation/payment";
 import { POLICY_FIELDS, policyFromForm, type PolicyErrorKey } from "@/lib/validation/policy";
 
 export type PolicyFormState = {
@@ -75,12 +77,44 @@ export async function addInsurerAction(name: string): Promise<{ id: string; name
   return data as { id: string; name: string };
 }
 
-/** Records this period's premium as paid: next due date moves to the next payment date. */
+/** Quick "Paid" (Reminders): the policy's premium, in cash, today. */
 export async function markPaidAction(form: FormData) {
   await requireUser();
   const id = String(form.get("policy_id"));
   if (!/^[0-9a-f-]{36}$/i.test(id)) return;
   const supabase = await createClient();
   await supabase.rpc("mark_premium_paid", { target_policy: id });
+  refresh();
+}
+
+export type PaymentFormState = { error?: PaymentErrorKey; done?: number; values?: Record<string, string> };
+
+/** "Mark as paid" with details (client profile): amount, method and date. */
+export async function recordPaymentAction(_prev: PaymentFormState, form: FormData): Promise<PaymentFormState> {
+  await requireUser();
+  const values = Object.fromEntries(["amount", "method", "paid_on"].map((k) => [k, String(form.get(k) ?? "")]));
+  const parsed = paymentFromForm(form, colomboToday());
+  if (!parsed.success) return { error: parsed.error.issues[0].message as PaymentErrorKey, values };
+
+  const { policy_id, amount, method, paid_on } = parsed.data;
+  const supabase = await createClient();
+  const { error } = await supabase.rpc("mark_premium_paid", {
+    target_policy: policy_id,
+    paid_amount: amount,
+    paid_method: method,
+    paid_date: paid_on,
+  });
+  if (error) return { error: "generic", values };
+  refresh();
+  return { done: Date.now() };
+}
+
+/** Takes back the policy's latest payment and puts its due date back. */
+export async function undoPaymentAction(form: FormData) {
+  await requireUser();
+  const id = String(form.get("payment_id"));
+  if (!/^[0-9a-f-]{36}$/i.test(id)) return;
+  const supabase = await createClient();
+  await supabase.rpc("undo_payment", { target_payment: id });
   refresh();
 }

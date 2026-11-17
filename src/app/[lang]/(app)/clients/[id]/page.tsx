@@ -2,16 +2,17 @@ import { Suspense } from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getDictionary, getLocale, type Dictionary } from "@/lib/i18n";
-import { getClientProfile, type ClientProfile } from "@/lib/data/clients";
+import { getClientProfile, PAYMENTS_SHOWN, type ClientProfile } from "@/lib/data/clients";
 import { formatPhone, maskNic, telLink, whatsappLink } from "@/lib/phone";
-import { ageFrom, daysUntil, formatDate, formatMoney } from "@/lib/format";
+import { ageFrom, colomboToday, daysUntil, formatDate, formatMoney } from "@/lib/format";
 import { fill } from "@/lib/text";
 import type { Locale } from "@/lib/locales";
 import { Avatar, Chip, type Tone } from "@/components/chip";
 import { ButtonAnchor, ButtonLink } from "@/components/button";
 import { Icon } from "@/components/icons";
 import { AddFamilyForm, AddNoteForm, RemoveButton } from "./tab-forms";
-import { MarkPaidButton } from "./policies/mark-paid-button";
+import { PayForm } from "./policies/payment-panel";
+import { PaymentHistory } from "./policies/payment-history";
 import { DocumentGrid } from "@/components/document-grid";
 import { Uploader } from "../../documents/uploader";
 import { listClientDocuments } from "@/lib/data/documents";
@@ -228,9 +229,14 @@ function PolicyCard({
           </div>
         ))}
       </dl>
-      <footer className="flex items-center justify-between gap-2 border-t border-border pt-3">
+      {(policy.payments.length > 0 || policy.next_due_date) && (
+        <div className="border-t border-border pt-3">
+          <PaymentHistory payments={policy.payments} shownLimit={PAYMENTS_SHOWN} lang={lang} dict={dict} />
+        </div>
+      )}
+      <footer className="flex flex-wrap items-center justify-between gap-2 border-t border-border pt-3">
         {policy.status === "active" && policy.next_due_date ? (
-          <MarkPaidButton policyId={policy.id} label={t.markPaid} confirmLabel={t.confirmPaid} />
+          <PayForm policyId={policy.id} premium={policy.premium} today={colomboToday()} t={dict.payments} />
         ) : (
           <span />
         )}
