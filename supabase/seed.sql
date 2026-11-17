@@ -19,6 +19,11 @@ declare
   lanka_life uuid; ceylon_general uuid; union_care uuid;
   nimal uuid; kumari uuid; ruwan uuid; dilani uuid; chaminda uuid; sanduni uuid; tharindu uuid;
 begin
+  if exists (select 1 from public.clients where agency_id = target_agency and full_name = 'Nimal Perera' and mobile = '077 123 4567') then
+    raise exception 'The demo data is already loaded for this account. Nothing was changed.'
+      using hint = 'To load it again, first delete the demo clients and insurers (see the README).';
+  end if;
+
   insert into public.insurers (agency_id, name, branch) values
     (target_agency, 'Lanka Life Assurance', 'Kandy') returning id into lanka_life;
   insert into public.insurers (agency_id, name, branch) values

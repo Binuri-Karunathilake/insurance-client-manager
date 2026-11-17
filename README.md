@@ -54,6 +54,12 @@ phone / tablet ──► Next.js on Vercel ──► Supabase (Postgres + Auth +
       where user_id = (select id from auth.users where email = 'you@example.com'))
    );
    ```
+   Run it once: a second run stops with "The demo data is already loaded". To start the demo again from scratch (this deletes **every** client and insurer in your account, so only before real data goes in):
+   ```sql
+   delete from public.clients;
+   delete from public.insurers;
+   ```
+   then run the `select public.seed_demo_data(...)` above again.
 6. **Connect the app.**
    ```bash
    cp .env.example .env.local   # then paste the project URL and publishable key
