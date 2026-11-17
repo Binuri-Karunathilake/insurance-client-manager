@@ -353,5 +353,32 @@
       "noteRequired": "Write what needs doing.",
       "generic": "Couldn't save. Try again."
     }
+  },
+  "digest": {
+    "pushTitle": "Today: {summary}",
+    "summaryPremiums": "{n} premiums due",
+    "summaryPremium": "1 premium due",
+    "summaryRenewals": "{n} renewals",
+    "summaryRenewal": "1 renewal",
+    "summaryBirthdays": "{n} birthdays",
+    "summaryBirthday": "1 birthday",
+    "summaryFollowUps": "{n} follow-ups",
+    "summaryFollowUp": "1 follow-up",
+    "summaryOverdue": "{n} overdue",
+    "more": "and {n} more",
+    "subject": "Client Manager · {date}: {summary}",
+    "greeting": "Good morning{name}",
+    "intro": "Here's what needs attention today.",
+    "overdue": "Overdue",
+    "today": "Today",
+    "week": "Next 7 days",
+    "month": "Renewals later this month",
+    "open": "Open reminders",
+    "footer": "You get this email because morning emails are on in Client Manager → Settings.",
+    "premium": "{type} premium {amount}",
+    "renewal": "{type} renewal",
+    "birthday": "Birthday",
+    "familyBirthday": "{member}'s birthday",
+    "followUp": "{note}"
   }
 }
