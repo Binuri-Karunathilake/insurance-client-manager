@@ -21,6 +21,8 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  // Excel import sends up to 3,000 rows to a server action (files are capped at 2 MB).
+  experimental: { serverActions: { bodySizeLimit: "4mb" } },
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },

@@ -571,7 +571,7 @@
     "example": "e.g. {value}",
     "clientSection": "Client",
     "policySection": "Policy (only rows with a policy number)",
-    "policyNote": "Empty “Pays”: life policies are taken as monthly, others yearly. No start date: the next due date is used.",
+    "policyNote": "Empty “Pays”: life policies are taken as monthly, others yearly. No start date: the next due date is used. No next due date: the next payment date from today is worked out, so put the date of any premium that's already late in “Next due”.",
     "check": "Check rows",
     "checking": "Checking…",
     "back": "Back",
@@ -617,7 +617,7 @@
     "outcome": {
       "newClient": "New client",
       "newClientPolicy": "New client, policy {policy}",
-      "policy": "Policy {policy} for a client already in the app",
+      "policy": "Policy {policy}, client already in the app",
       "skipped": "Already in the app"
     },
     "problems": {
@@ -656,6 +656,7 @@
       "needName": "Choose the column with the client's name.",
       "needMobile": "Choose the column with the mobile number.",
       "generic": "Couldn't import. Nothing was saved. Check your connection and try again."
-    }
+    },
+    "doneInsurersOne": "Also added 1 insurance company."
   }
 }

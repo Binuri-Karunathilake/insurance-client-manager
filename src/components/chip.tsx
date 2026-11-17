@@ -22,9 +22,10 @@ export function Chip({ tone, children }: { tone: Tone; children: ReactNode }) {
 export function Avatar({ name, size = 40 }: { name: string; size?: number }) {
   const initials = name
     .split(/\s+/)
+    .map((part) => part.match(/\p{L}/u)?.[0]) // first letter, so "Nadee" in quotes gives N
     .filter(Boolean)
     .slice(0, 2)
-    .map((part) => part[0]?.toUpperCase())
+    .map((letter) => letter!.toUpperCase())
     .join("");
   return (
     <span

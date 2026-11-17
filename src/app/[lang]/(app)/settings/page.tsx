@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { getCurrentUser } from "@/lib/auth";
 import { getDictionary, getLocale, type Dictionary } from "@/lib/i18n";
@@ -79,6 +80,13 @@ async function Settings({ lang, dict }: { lang: Locale; dict: Dictionary }) {
           {dict.export.download}
         </a>
         <p className="text-caption text-muted">{dict.export.filesNote}</p>
+        <Link
+          href={`/${lang}/clients/import`}
+          className="inline-flex items-center gap-2 self-start border-t border-border pt-4 text-body font-medium text-primary hover:underline"
+        >
+          <Icon name="upload" size={20} />
+          {dict.import.button}
+        </Link>
       </Card>
 
       {(configured.push || configured.email) && (
