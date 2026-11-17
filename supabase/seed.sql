@@ -70,6 +70,24 @@ begin
     (target_agency, sanduni,  ceylon_general, 'CG-M-48810',    'motor',    null,    29900, 'yearly',    '2022-04-10',                              null,       null,       'lapsed'),
     (target_agency, tharindu, union_care,     'UC-H-8120',     'health',   750000,  18500, 'yearly',    (today + 18 - interval '2 years')::date,   null,       today + 18, 'active');
 
+  -- Three months of past payments for the monthly policies, so the
+  -- payment history and monthly report have something to show.
+  insert into public.payments (agency_id, client_id, policy_id, amount, due_date, paid_on, method)
+  select p.agency_id, p.client_id, p.id, p.premium, d.due, d.due - (random() * 3)::int,
+         (array['cash', 'bank', 'online']::public.payment_method[])[1 + (random() * 2)::int]
+    from public.policies p
+    cross join lateral (
+      select (p.next_due_date - make_interval(months => m))::date as due from generate_series(1, 3) m
+    ) d
+   where p.agency_id = target_agency and p.frequency = 'monthly' and p.next_due_date is not null;
+
+  insert into public.payments (agency_id, client_id, policy_id, amount, due_date, paid_on, method)
+  select p.agency_id, p.client_id, p.id, p.premium, (p.renewal_date - interval '1 year')::date,
+         (p.renewal_date - interval '1 year')::date, 'bank'
+    from public.policies p
+   where p.agency_id = target_agency and p.frequency = 'yearly' and p.renewal_date is not null
+     and p.renewal_date - interval '1 year' < now();
+
   insert into public.follow_ups (agency_id, client_id, due_date, note) values
     (target_agency, chaminda, today, 'Call back about home insurance quote'),
     (target_agency, nimal, today + 6, 'Send health plan quote for Kasun before university');
